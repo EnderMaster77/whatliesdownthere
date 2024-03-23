@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bne8rdptvf6cb"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="1_lucp4"]
+[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_n2u5q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
+
+[sub_resource type="BulletType" id="BulletType_16r2w"]
+initialSpeed = 650.0
+_shape = SubResource("CircleShape2D_5vocg")
+mask = 5
+
+[node name="Pistol" type="Spawner"]
+startMode = 2
+bulletType = SubResource("BulletType_16r2w")
+texture = ExtResource("1_n2u5q")
+script = ExtResource("1_lucp4")
+player_weapon = true
+damage = 50.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

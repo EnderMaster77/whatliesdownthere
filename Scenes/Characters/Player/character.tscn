@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bp5bx24lhr0wd"]
+
+[ext_resource type="Script" path="res://Scenes/Characters/Player/movement.gd" id="1_8a5wn"]
+[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_ybfct"]
+[ext_resource type="Script" path="res://Scenes/Characters/Player/hitbox.gd" id="3_umwci"]
+[ext_resource type="PackedScene" uid="uid://bne8rdptvf6cb" path="res://Scenes/Weapons/Pistol.tscn" id="4_hvh4y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w3ugs"]
+size = Vector2(160, 160)
+
+[node name="Character" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_8a5wn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_ybfct")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w3ugs")
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("3_umwci")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("RectangleShape2D_w3ugs")
+
+[node name="Weapons" type="Node2D" parent="."]
+
+[node name="Pistol" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("4_hvh4y")]
+trackedNode = NodePath("../../cursor_location")
+startTowardPlayer = true
+staysTowardPlayer = true
+
+[node name="cursor_location" type="Node2D" parent="."]
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
