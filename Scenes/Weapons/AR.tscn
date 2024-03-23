@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bne8rdptvf6cb"]
+[gd_scene load_steps=5 format=3 uid="uid://5r0rsulu8p0"]
 
-[ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="1_lucp4"]
-[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_n2u5q"]
+[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_7mbyf"]
+[ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_66qyb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
 
@@ -11,20 +11,18 @@ _shape = SubResource("CircleShape2D_5vocg")
 mask = 5
 collideWithBodies = true
 
-[node name="Pistol" type="Spawner"]
+[node name="AR" type="Spawner"]
 startMode = 2
 bulletType = SubResource("BulletType_16r2w")
-texture = ExtResource("1_n2u5q")
-script = ExtResource("1_lucp4")
+texture = ExtResource("1_7mbyf")
+script = ExtResource("2_66qyb")
 player_weapon = true
-mag_size = 12
-max_bullets_in_storage = 48
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.25
 
 [node name="ReloadTimer" type="Timer" parent="."]
-wait_time = 0.75
+wait_time = 1.25
 one_shot = true
 
 [connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]

@@ -305,11 +305,7 @@ zoom = Vector2(0.5, 0.5)
 position = Vector2(-1456, -764)
 player = NodePath("../Character")
 
-[node name="Spawner" parent="BasicEnemy" index="4" node_paths=PackedStringArray("trackedNode")]
-spawnerMode = 1
-fireRate = 0.01
+[node name="Weapon" parent="BasicEnemy" index="6" node_paths=PackedStringArray("trackedNode")]
 trackedNode = NodePath("../../Character")
-startTowardPlayer = true
-staysTowardPlayer = true
 
 [editable path="BasicEnemy"]

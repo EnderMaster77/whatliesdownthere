@@ -1,18 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://bh1ic0el6jv4c"]
+[gd_scene load_steps=8 format=3 uid="uid://bh1ic0el6jv4c"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Enemy/BasicEnemy.gd" id="1_34a26"]
 [ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_j0r05"]
 [ext_resource type="Script" path="res://Scenes/Characters/Enemy/Area2D.gd" id="3_yrvmv"]
+[ext_resource type="PackedScene" uid="uid://bne8rdptvf6cb" path="res://Scenes/Weapons/Pistol.tscn" id="4_6nld5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jup6i"]
 radius = 63.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1fx1q"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_vykx0"]
 
-[sub_resource type="BulletType" id="BulletType_vf40j"]
-initialSpeed = 600.0
-_shape = SubResource("CircleShape2D_1fx1q")
-mask = 2
+[sub_resource type="BulletType" id="BulletType_aly5s"]
+initialSpeed = 650.0
+_shape = SubResource("CircleShape2D_vykx0")
+mask = 3
+collideWithBodies = true
 
 [node name="BasicEnemy" type="CharacterBody2D"]
 collision_layer = 0
@@ -34,23 +36,14 @@ path_postprocessing = 1
 radius = 160.0
 avoidance_layers = 2
 avoidance_mask = 2
-debug_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
 
-[node name="Spawner" type="Spawner" parent="."]
-startMode = 2
-bulletType = SubResource("BulletType_vf40j")
-texture = ExtResource("1_j0r05")
-
-[node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.4
-autostart = true
-
 [node name="LOS check" type="RayCast2D" parent="."]
-collision_mask = 7
+visible = false
+collision_mask = 129
 collide_with_areas = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -62,6 +55,11 @@ script = ExtResource("3_yrvmv")
 shape = SubResource("CircleShape2D_jup6i")
 debug_color = Color(0, 0.6, 0, 0.419608)
 
+[node name="Weapon" parent="." instance=ExtResource("4_6nld5")]
+bulletType = SubResource("BulletType_aly5s")
+startTowardPlayer = true
+staysTowardPlayer = true
+player_weapon = false
+mag_size = 30
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="bullet_hit" from="Spawner" to="." method="_on_spawner_bullet_hit"]
-[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
