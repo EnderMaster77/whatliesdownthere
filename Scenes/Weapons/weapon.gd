@@ -15,6 +15,9 @@ class_name Weapon
 var selected: bool = false
 var reloading: bool = false
 var can_fire: bool = true
+
+
+
 func reload():
 	if reloading == true:
 		return
@@ -25,15 +28,16 @@ func reload():
 		$ReloadTimer.start()
 		reloading = true
 func fire():
-	if can_fire == true && reloading == false:
-		if bullets_in_mag > 0 or player_weapon == false:
-			set_manual_start(true)
-			can_fire = false
-			$Timer.start()
-			bullets_in_mag -= 1
-			print(bullets_in_mag, " ", bullets_in_storage)
-			if durability != 0:
-				durability -= 1
+	if selected == true or player_weapon == false:
+		if can_fire == true && reloading == false:
+			if bullets_in_mag > 0 or player_weapon == false:
+				set_manual_start(true)
+				can_fire = false
+				$Timer.start()
+				bullets_in_mag -= 1
+				print(bullets_in_mag, " ", bullets_in_storage)
+				if durability != 0:
+					durability -= 1
 
 
 func _on_timer_timeout() -> void:
