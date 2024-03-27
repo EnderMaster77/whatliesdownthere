@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1vnrh3p6uw3a"]
+
+[ext_resource type="Texture2D" uid="uid://b2ihu7nqd2ha7" path="res://Assets/Art/mybullet.png" id="1_dly1d"]
+[ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_qgxd2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
+
+[sub_resource type="BulletType" id="BulletType_16r2w"]
+initialSpeed = 500.0
+_shape = SubResource("CircleShape2D_5vocg")
+scale = 10.0
+maxLifetime = 0.4
+mask = 5
+collideWithBodies = true
+
+[node name="FlameThrower" type="Spawner"]
+startMode = 2
+bulletType = SubResource("BulletType_16r2w")
+homing = true
+homingWeight = 0.75
+startTowardPlayer = true
+staysTowardPlayer = true
+texture = ExtResource("1_dly1d")
+script = ExtResource("2_qgxd2")
+weapon_name = "FlameThrower"
+player_weapon = true
+damage = 10.0
+mag_size = 200
+max_bullets_in_storage = 300
+ammo_type = "Energy"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+
+[node name="ReloadTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

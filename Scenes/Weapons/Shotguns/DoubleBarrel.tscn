@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://5r0rsulu8p0"]
+[gd_scene load_steps=5 format=3 uid="uid://cdy7yvydy6qod"]
 
-[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_7mbyf"]
-[ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_66qyb"]
+[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_sg1n5"]
+[ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_rgdrq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
 
@@ -11,18 +11,28 @@ _shape = SubResource("CircleShape2D_5vocg")
 mask = 5
 collideWithBodies = true
 
-[node name="AR" type="Spawner"]
+[node name="DB" type="Spawner"]
 startMode = 2
 bulletType = SubResource("BulletType_16r2w")
-texture = ExtResource("1_7mbyf")
-script = ExtResource("2_66qyb")
+fireRadiusDegrees = 20.0
+bulletsPerRadius = 12
+startTowardPlayer = true
+staysTowardPlayer = true
+offsetTowardPlayer = 32.5
+texture = ExtResource("1_sg1n5")
+script = ExtResource("2_rgdrq")
+weapon_name = "Double-Barrel Shotgun"
 player_weapon = true
+damage = 7.0
+mag_size = 2
+max_bullets_in_storage = 24
+durability = 26.0
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.01
 
 [node name="ReloadTimer" type="Timer" parent="."]
-wait_time = 1.25
+wait_time = 1.75
 one_shot = true
 
 [connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]

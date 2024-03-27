@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxvsl8kdu82aq"]
+
+[ext_resource type="Texture2D" uid="uid://b2ihu7nqd2ha7" path="res://Assets/Art/mybullet.png" id="1_vugys"]
+[ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_a26w3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
+
+[sub_resource type="BulletType" id="BulletType_16r2w"]
+initialSpeed = 1000.0
+_shape = SubResource("CircleShape2D_5vocg")
+scale = 10.0
+mask = 5
+collideWithBodies = true
+
+[node name="Sniper" type="Spawner"]
+startMode = 2
+bulletType = SubResource("BulletType_16r2w")
+startTowardPlayer = true
+staysTowardPlayer = true
+texture = ExtResource("1_vugys")
+script = ExtResource("2_a26w3")
+weapon_name = "AR"
+random_spread = 15.0
+player_weapon = true
+damage = 55.0
+mag_size = 7
+ammo_type = "Sniper"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.75
+
+[node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 1.25
+one_shot = true
+
+[connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

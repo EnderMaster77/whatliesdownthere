@@ -1,17 +1,45 @@
-[gd_scene load_steps=7 format=3 uid="uid://bp5bx24lhr0wd"]
+[gd_scene load_steps=12 format=3 uid="uid://bp5bx24lhr0wd"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player/movement.gd" id="1_8a5wn"]
 [ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_ybfct"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/hitbox.gd" id="3_umwci"]
-[ext_resource type="PackedScene" uid="uid://bne8rdptvf6cb" path="res://Scenes/Weapons/Pistol.tscn" id="4_hvh4y"]
-[ext_resource type="PackedScene" uid="uid://5r0rsulu8p0" path="res://Scenes/Weapons/AR.tscn" id="5_sifh0"]
+[ext_resource type="PackedScene" uid="uid://i7h47253badx" path="res://Scenes/Weapons/Special/Hornet.tscn" id="4_5klr0"]
+[ext_resource type="PackedScene" uid="uid://cbvgewg8najg1" path="res://Scenes/Weapons/Shotguns/AA12.tscn" id="5_lyr18"]
+[ext_resource type="PackedScene" uid="uid://cdy7yvydy6qod" path="res://Scenes/Weapons/Shotguns/DoubleBarrel.tscn" id="6_0m88k"]
+[ext_resource type="PackedScene" uid="uid://bxvsl8kdu82aq" path="res://Scenes/Weapons/Snipers/Intervention.tscn" id="7_lodq6"]
+[ext_resource type="PackedScene" uid="uid://hs3tt6ej7ebk" path="res://Scenes/GUI/GUI.tscn" id="8_bcjwj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w3ugs"]
 size = Vector2(160, 160)
 
-[node name="Character" type="CharacterBody2D"]
+[sub_resource type="Gradient" id="Gradient_sib7k"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6u7it"]
+gradient = SubResource("Gradient_sib7k")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.824786, 0.136752)
+
+[node name="Character" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 128
 script = ExtResource("1_8a5wn")
+max_ammo = {
+"AR": 200,
+"Energy": 200,
+"Pistol": 200,
+"Shotgun": 200,
+"Sniper": 200,
+"Special": 200
+}
+ammo = {
+"AR": 200,
+"Energy": 200,
+"Pistol": 200,
+"Shotgun": 200,
+"Sniper": 200,
+"Special": 200
+}
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.25, 1.25)
@@ -30,16 +58,46 @@ shape = SubResource("RectangleShape2D_w3ugs")
 
 [node name="Weapons" type="Node2D" parent="."]
 
-[node name="AR" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("5_sifh0")]
+[node name="Hornet" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("4_5klr0")]
 trackedNode = NodePath("../../cursor_location")
-startTowardPlayer = true
-staysTowardPlayer = true
 
-[node name="Pistol" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("4_hvh4y")]
+[node name="AA12" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("5_lyr18")]
 trackedNode = NodePath("../../cursor_location")
-startTowardPlayer = true
-staysTowardPlayer = true
+
+[node name="DB" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("6_0m88k")]
+trackedNode = NodePath("../../cursor_location")
+offsetTowardPlayer = -10.0
+
+[node name="Sniper" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("7_lodq6")]
+trackedNode = NodePath("../../cursor_location")
 
 [node name="cursor_location" type="Node2D" parent="."]
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+scale = Vector2(50, 50)
+color = Color(1, 1, 0.207843, 1)
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = SubResource("GradientTexture2D_6u7it")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Gui" parent="CanvasLayer" instance=ExtResource("8_bcjwj")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.4, 0.4)
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="can_dash_timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="can_dash_timer" to="." method="_on_can_dash_timer_timeout"]
+
+[editable path="CanvasLayer/Gui"]

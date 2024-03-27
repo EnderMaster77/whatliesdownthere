@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbvgewg8najg1"]
+
+[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_g775j"]
+[ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_7emvs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
+
+[sub_resource type="BulletType" id="BulletType_16r2w"]
+initialSpeed = 650.0
+_shape = SubResource("CircleShape2D_5vocg")
+mask = 5
+collideWithBodies = true
+
+[node name="AA12" type="Spawner"]
+startMode = 2
+bulletType = SubResource("BulletType_16r2w")
+fireRadiusDegrees = 65.0
+bulletsPerRadius = 12
+startTowardPlayer = true
+staysTowardPlayer = true
+offsetTowardPlayer = -45.0
+texture = ExtResource("1_g775j")
+script = ExtResource("2_7emvs")
+weapon_name = "AA12"
+player_weapon = true
+damage = 5.0
+mag_size = 20
+max_bullets_in_storage = 24
+durability = 80.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.75
+
+[node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 1.75
+one_shot = true
+
+[connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmd3jg1y6nve0"]
+
+[ext_resource type="Texture2D" uid="uid://b2ihu7nqd2ha7" path="res://Assets/Art/mybullet.png" id="1_don4i"]
+[ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_wtklh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
+
+[sub_resource type="BulletType" id="BulletType_16r2w"]
+initialSpeed = 650.0
+_shape = SubResource("CircleShape2D_5vocg")
+scale = 10.0
+mask = 5
+collideWithBodies = true
+
+[node name="AUG" type="Spawner"]
+startMode = 2
+bulletType = SubResource("BulletType_16r2w")
+startTowardPlayer = true
+staysTowardPlayer = true
+texture = ExtResource("1_don4i")
+script = ExtResource("2_wtklh")
+weapon_name = "AUG A1"
+player_weapon = true
+mag_size = 42
+durability = 1.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.18
+
+[node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

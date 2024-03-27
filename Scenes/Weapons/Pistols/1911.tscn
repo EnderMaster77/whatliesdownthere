@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bne8rdptvf6cb"]
+[gd_scene load_steps=5 format=3 uid="uid://dnvfbx028jddk"]
 
-[ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="1_lucp4"]
-[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_n2u5q"]
+[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_mufu4"]
+[ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_2n7xj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
 
@@ -11,14 +11,17 @@ _shape = SubResource("CircleShape2D_5vocg")
 mask = 5
 collideWithBodies = true
 
-[node name="Pistol" type="Spawner"]
+[node name="1911" type="Spawner"]
 startMode = 2
 bulletType = SubResource("BulletType_16r2w")
-texture = ExtResource("1_n2u5q")
-script = ExtResource("1_lucp4")
+texture = ExtResource("1_mufu4")
+script = ExtResource("2_2n7xj")
+weapon_name = "1911"
+random_spread = 10.0
 player_weapon = true
-mag_size = 12
+mag_size = 8
 max_bullets_in_storage = 48
+ammo_type = "Pistol"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5

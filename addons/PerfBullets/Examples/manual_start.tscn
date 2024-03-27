@@ -9,7 +9,6 @@
 [sub_resource type="BulletType" id="BulletType_yiogt"]
 initialSpeed = 150.0
 _shape = SubResource("CircleShape2D_8splg")
-mask = 2
 
 [node name="manual_start" type="Node2D"]
 

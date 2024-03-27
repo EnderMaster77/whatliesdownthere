@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://hs3tt6ej7ebk"]
+
+[node name="Gui" type="CanvasGroup"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 919.0
+offset_bottom = 24.0
+text = "Gun:"
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = 24.0
+offset_right = 919.0
+offset_bottom = 48.0
+text = "Ammo In Mag:"
+
+[node name="Label3" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = 48.0
+offset_right = 919.0
+offset_bottom = 72.0
+text = "Ammo In Storage:"
+
+[node name="Label4" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = 72.0
+offset_right = 919.0
+offset_bottom = 96.0
+text = "Durability:"
+
+[node name="Label5" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = 96.0
+offset_right = 919.0
+offset_bottom = 120.0
+text = "Health:"

@@ -1,23 +1,26 @@
-[gd_scene load_steps=8 format=3 uid="uid://bh1ic0el6jv4c"]
+[gd_scene load_steps=9 format=3 uid="uid://bh1ic0el6jv4c"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Enemy/BasicEnemy.gd" id="1_34a26"]
 [ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_j0r05"]
 [ext_resource type="Script" path="res://Scenes/Characters/Enemy/Area2D.gd" id="3_yrvmv"]
-[ext_resource type="PackedScene" uid="uid://bne8rdptvf6cb" path="res://Scenes/Weapons/Pistol.tscn" id="4_6nld5"]
+[ext_resource type="PackedScene" uid="uid://bne8rdptvf6cb" path="res://Scenes/Weapons/Pistols/Beretta 92.tscn" id="4_06g56"]
+[ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="5_o37sf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jup6i"]
 radius = 63.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vykx0"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_fxl3v"]
 
-[sub_resource type="BulletType" id="BulletType_aly5s"]
-initialSpeed = 650.0
-_shape = SubResource("CircleShape2D_vykx0")
+[sub_resource type="BulletType" id="BulletType_5taxc"]
+initialSpeed = 500.0
+_shape = SubResource("CircleShape2D_fxl3v")
+scale = 10.0
 mask = 3
 collideWithBodies = true
 
 [node name="BasicEnemy" type="CharacterBody2D"]
-collision_layer = 0
+collision_layer = 4
+collision_mask = 5
 motion_mode = 1
 wall_min_slide_angle = 0.0174533
 script = ExtResource("1_34a26")
@@ -33,7 +36,9 @@ debug_color = Color(0, 0.6, 0, 0.419608)
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 target_desired_distance = 30.0
 path_postprocessing = 1
-radius = 160.0
+avoidance_enabled = true
+radius = 248.56
+max_neighbors = 3
 avoidance_layers = 2
 avoidance_mask = 2
 
@@ -42,7 +47,6 @@ wait_time = 0.1
 autostart = true
 
 [node name="LOS check" type="RayCast2D" parent="."]
-visible = false
 collision_mask = 129
 collide_with_areas = true
 
@@ -55,11 +59,18 @@ script = ExtResource("3_yrvmv")
 shape = SubResource("CircleShape2D_jup6i")
 debug_color = Color(0, 0.6, 0, 0.419608)
 
-[node name="Weapon" parent="." instance=ExtResource("4_6nld5")]
-bulletType = SubResource("BulletType_aly5s")
+[node name="Weapon" parent="." instance=ExtResource("4_06g56")]
+bulletType = SubResource("BulletType_5taxc")
 startTowardPlayer = true
 staysTowardPlayer = true
+texture = ExtResource("5_o37sf")
 player_weapon = false
-mag_size = 30
+damage = 10.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1.14441e-05, 2.09808e-05)
+scale = Vector2(19.2, 19.2)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

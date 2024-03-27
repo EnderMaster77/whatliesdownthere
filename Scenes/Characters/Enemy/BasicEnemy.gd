@@ -5,9 +5,9 @@ const SPEED: float = 500
 @export var player: Node2D
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var LOS_check := $"LOS check" as RayCast2D
-
+var on_screen: bool = false
 @export var max_health: float= 100
-@export var health: float = 100
+@export var health: float = 50
 func damage(damage: float):
 	health -= damage
 	if health <= 0:
@@ -18,7 +18,6 @@ func die():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
 	LOS_check.target_position = to_local(player.global_position)
 	if nav_agent.is_target_reached() == false:
 		var dir = to_local(nav_agent.get_next_path_position()).normalized()
@@ -29,7 +28,7 @@ func _process(delta: float) -> void:
 	if $Weapon.can_fire == true:
 		if LOS_check.get_collider() == null:
 			return
-		elif LOS_check.get_collider().is_in_group("Player"):
+		elif LOS_check.get_collider().is_in_group("Player") && on_screen == true:
 			$Weapon.fire()
 	move_and_slide()
 	
@@ -37,7 +36,17 @@ func _process(delta: float) -> void:
 func makepath() -> void:
 	if LOS_check.get_collider() == null:
 		return
-	elif LOS_check.get_collider().is_in_group("Player"):
+	elif LOS_check.get_collider().is_in_group("Player") && on_screen == true:
 		nav_agent.target_position = player.global_position
 func _on_timer_timeout() -> void:
 	makepath()
+
+
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	on_screen = true
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	on_screen = false

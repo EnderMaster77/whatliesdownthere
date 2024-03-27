@@ -3,20 +3,42 @@ extends CharacterBody2D
 const SPEED: float = 1000
 @export var health: float = 100
 var weapons: Array
-
 var selectedweapon
+var dashing: bool = false
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
+var can_dash: bool = true
+
+
+@export var max_ammo: Dictionary = {"Pistol":0,
+						"AR":0,
+						"Shotgun":0,
+						"Energy": 0,
+						"Special":0,
+						"Sniper": 0}
+
+@export var ammo: Dictionary = {
+						"Pistol":0,
+						"AR":0,
+						"Shotgun":0,
+						"Energy": 0,
+						"Special":0,
+						"Sniper": 0}
+
+
+
+
 
 
 
 func damage(damage: float):
 	health -= damage
+	$CanvasLayer/Gui/Control/Label5.text = "Health: " + str(health)
 	if health <= 0:
 		die()
 
 func die():
-	health = 100
+	queue_free()
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Switch1"):
@@ -46,30 +68,62 @@ func _process(delta: float) -> void:
 			disable_weapons()
 			weapons[3].selected = true
 			selectedweapon = weapons[3]
+			
 		print("Selected Weapon:",weapons[3])
-	if Input.is_action_pressed("Fire"):
+	if Input.is_action_pressed("Fire") && selectedweapon != null:
 		selectedweapon.fire()
-	if Input.is_action_just_pressed("Reload"):
+	if Input.is_action_just_pressed("Reload") && selectedweapon != null:
 		selectedweapon.reload()
+	if Input.is_action_just_pressed("Throw Weapon") && selectedweapon != null:
+		selectedweapon.throw()
+		selectedweapon = null
 	$cursor_location.global_position = get_global_mouse_position()
+	if selectedweapon != null:
+		$CanvasLayer/Gui/Control/Label.text = "Weapon: " + str(selectedweapon.name)
+		$CanvasLayer/Gui/Control/Label2.text = "Bullets In mag: " + str(selectedweapon.bullets_in_mag)
+		$CanvasLayer/Gui/Control/Label3.text = "Bullets in storage: " + str(ammo[selectedweapon.ammo_type])
+		$CanvasLayer/Gui/Control/Label4.text = "Durability: " + str(selectedweapon.durability)
+
+
+
+
+
+
+
+
 
 func _physics_process(delta: float) -> void:
-	var movement_dir: Vector2 = Vector2(Input.get_axis("Left","Right"), Input.get_axis("Up","Down")).normalized()
-	velocity.x = movement_dir.x  * SPEED
-	velocity.y = movement_dir.y * SPEED
+	if Input.is_action_just_pressed("Dash") && can_dash == true:
+		$DashTimer.start()
+		can_dash = false
+		dashing = true
+		velocity *= 4
+		$hitbox.collision_layer = 0
+		$hitbox.collision_mask = 0
+	if dashing == false:
+		var movement_dir: Vector2 = Vector2(Input.get_axis("Left","Right"), Input.get_axis("Up","Down")).normalized()
+		velocity.x = movement_dir.x  * SPEED
+		velocity.y = movement_dir.y * SPEED
+	else:
+		velocity
 	move_and_slide()
+
+
+
+
+
+
+
 
 func get_weapons():
 	var node: Node2D
 	weapons = []
 	for i in $Weapons.get_children():
-		print("weapon:", i)
 		if i != null:
 			weapons.append(i)
 	if weapons.size() < 4:
 		for i in 4 - weapons.size():
 			weapons.append(null)
-	print(weapons)
 func disable_weapons():
 	if weapons[0] != null:
 		weapons[0].selected = false
@@ -79,3 +133,15 @@ func disable_weapons():
 		weapons[2].selected = false
 	if weapons[3] != null:
 		weapons[3].selected = false
+
+
+func _on_dash_timer_timeout() -> void:
+	$can_dash_timer.start()
+	$hitbox.collision_layer = 2
+	$hitbox.collision_mask = 2
+	dashing = false
+
+
+func _on_can_dash_timer_timeout() -> void:
+	print("DASH")
+	can_dash = true
