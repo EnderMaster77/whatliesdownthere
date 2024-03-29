@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cc0fl588uxjrg"]
+[gd_scene load_steps=6 format=3 uid="uid://cc0fl588uxjrg"]
 
 [ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_12qu2"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_ujk6u"]
+[ext_resource type="Texture2D" uid="uid://dv783oc4ax85c" path="res://Assets/mp5.png" id="3_8rhqj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
 
@@ -18,15 +19,17 @@ startTowardPlayer = true
 staysTowardPlayer = true
 texture = ExtResource("1_12qu2")
 script = ExtResource("2_ujk6u")
+gun_texture = ExtResource("3_8rhqj")
 weapon_name = "MP5"
-random_spread = 45.0
+random_spread = 22.5
 player_weapon = true
 damage = 15.0
-max_bullets_in_storage = 100
+mag_size = 50
+durability = 150.0
 ammo_type = "Pistol"
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.105
 
 [node name="ReloadTimer" type="Timer" parent="."]
 one_shot = true

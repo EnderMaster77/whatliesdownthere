@@ -23,7 +23,6 @@ random_spread = 45.0
 player_weapon = true
 damage = 15.0
 mag_size = 25
-max_bullets_in_storage = 100
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.125

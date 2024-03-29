@@ -1,30 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://bne8rdptvf6cb"]
+[gd_scene load_steps=6 format=3 uid="uid://bne8rdptvf6cb"]
 
-[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_daocl"]
+[ext_resource type="Texture2D" uid="uid://dy12h5hpgvayw" path="res://Assets/pro bullet.png" id="1_fs5e4"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_8pm12"]
+[ext_resource type="Texture2D" uid="uid://bg45fsr7mt4fl" path="res://Assets/Guns/beretta.png" id="3_05of4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
 
 [sub_resource type="BulletType" id="BulletType_16r2w"]
 initialSpeed = 650.0
 _shape = SubResource("CircleShape2D_5vocg")
+scale = 5.0
 mask = 5
 collideWithBodies = true
 
 [node name="Beretta 92" type="Spawner"]
 startMode = 2
 bulletType = SubResource("BulletType_16r2w")
-texture = ExtResource("1_daocl")
+startTowardPlayer = true
+staysTowardPlayer = true
+texture = ExtResource("1_fs5e4")
 script = ExtResource("2_8pm12")
+gun_texture = ExtResource("3_05of4")
 weapon_name = "Beretta 92"
 random_spread = 10.0
 player_weapon = true
+damage = 15.0
 mag_size = 15
-max_bullets_in_storage = 48
 ammo_type = "Pistol"
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.3
 
 [node name="ReloadTimer" type="Timer" parent="."]
 wait_time = 0.75

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://y4ps1qn4c44y"]
+
+[ext_resource type="Script" path="res://Scenes/Pickups/healthpack.gd" id="1_dq20a"]
+[ext_resource type="Texture2D" uid="uid://cqckmuky2t2vh" path="res://Assets/med kit.png" id="2_f75lb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bgcqd"]
+size = Vector2(129, 128)
+
+[node name="Healthpack" type="Area2D"]
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("1_dq20a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("2_f75lb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_bgcqd")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -6,23 +6,24 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
 
 [sub_resource type="BulletType" id="BulletType_16r2w"]
-initialSpeed = 650.0
+initialSpeed = 950.0
 _shape = SubResource("CircleShape2D_5vocg")
 scale = 10.0
 mask = 5
 collideWithBodies = true
 
-[node name="Sniper" type="Spawner"]
+[node name="SVD" type="Spawner"]
 startMode = 2
 bulletType = SubResource("BulletType_16r2w")
 startTowardPlayer = true
 staysTowardPlayer = true
 texture = ExtResource("1_koxsn")
 script = ExtResource("2_tu280")
-weapon_name = "AR"
-random_spread = 15.0
+weapon_name = "SVD"
 player_weapon = true
-durability = 1.0
+damage = 45.0
+mag_size = 10
+durability = 50.0
 ammo_type = "Sniper"
 
 [node name="Timer" type="Timer" parent="."]

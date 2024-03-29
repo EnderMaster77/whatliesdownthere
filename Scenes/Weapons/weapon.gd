@@ -1,7 +1,8 @@
 extends Spawner
 class_name Weapon
 
-
+@export var gun_texture: Texture2D
+@export var gun_side_profile: Texture2D
 
 
 @export var weapon_name: String ## Name Of the Weapon.
@@ -13,13 +14,10 @@ class_name Weapon
 
 @export var damage: float = 20.0 ## Damage weapon deals.
 @export var mag_size: int = 30 ## Size of magazine.
-@export var max_bullets_in_storage: int = 120 ## Amount of bullets that can be stored.
 @export var durability: float = 100 ## The amount of shots required to break a weapon. Setting this value to 0 makes the weapon unbreakable.
-@export var pierce: int = 1
 @export_enum("AR","Shotgun","Pistol","Energy","Special","Rocket","Sniper") var ammo_type = "AR"
 
 @onready var bullets_in_mag: int = mag_size
-@onready var bullets_in_storage: int = max_bullets_in_storage
 
 var selected: bool = false
 var reloading: bool = false
@@ -85,7 +83,7 @@ func _on_bullet_hit(result: Array, bulletIndex: int, spawner: Object) -> void:
 func _on_reload_timer_timeout() -> void:
 	var added_bullets = mag_size - bullets_in_mag
 	reloading = false
-	if bullets_in_storage - added_bullets <= 0:
+	if get_parent().get_parent().ammo[ammo_type] - added_bullets <= 0:
 		bullets_in_mag = get_parent().get_parent().ammo[ammo_type]
 		get_parent().get_parent().ammo[ammo_type] = 0
 	else:

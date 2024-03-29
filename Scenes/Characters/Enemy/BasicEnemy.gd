@@ -3,6 +3,8 @@ extends CharacterBody2D
 const SPEED: float = 500
 
 @export var player: Node2D
+var healthpackfab = preload("res://Scenes/Pickups/healthpack.tscn")
+var ammofab := preload("res://Scenes/Pickups/ammo-pistol.tscn")
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var LOS_check := $"LOS check" as RayCast2D
 var on_screen: bool = false
@@ -10,15 +12,39 @@ var on_screen: bool = false
 @export var health: float = 50
 func damage(damage: float):
 	health -= damage
+	
 	if health <= 0:
+		randomize()
+		var r = randf()
+		print(r)
+		if r >= .50:
+			var randnum: float = randf()
+			if randnum > .80:
+				print("Drop Weapon")
+			elif randnum > 0.40:
+				var pack = healthpackfab.instantiate()
+				pack.global_position = global_position
+				add_sibling(pack)
+				pack.scale = scale
+				pack.global_position = global_position
+			else:
+				var pack = ammofab.instantiate()
+				pack.global_position = global_position
+				add_sibling(pack)
+				pack.scale = scale
+				pack.global_position = global_position
+		else:
+			print("FAIL!!")
 		die()
 
 func die():
+	
 	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	LOS_check.target_position = to_local(player.global_position)
+	if player != null:
+		LOS_check.target_position = to_local(player.global_position)
 	if nav_agent.is_target_reached() == false:
 		var dir = to_local(nav_agent.get_next_path_position()).normalized()
 		velocity.x = dir.x * SPEED

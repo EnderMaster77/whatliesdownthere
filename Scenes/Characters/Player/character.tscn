@@ -1,16 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://bp5bx24lhr0wd"]
+[gd_scene load_steps=13 format=3 uid="uid://bp5bx24lhr0wd"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player/movement.gd" id="1_8a5wn"]
-[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_ybfct"]
+[ext_resource type="Texture2D" uid="uid://nauiwoxx1oun" path="res://Assets/Characters/player.png" id="2_adshr"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/hitbox.gd" id="3_umwci"]
-[ext_resource type="PackedScene" uid="uid://i7h47253badx" path="res://Scenes/Weapons/Special/Hornet.tscn" id="4_5klr0"]
-[ext_resource type="PackedScene" uid="uid://cbvgewg8najg1" path="res://Scenes/Weapons/Shotguns/AA12.tscn" id="5_lyr18"]
-[ext_resource type="PackedScene" uid="uid://cdy7yvydy6qod" path="res://Scenes/Weapons/Shotguns/DoubleBarrel.tscn" id="6_0m88k"]
-[ext_resource type="PackedScene" uid="uid://bxvsl8kdu82aq" path="res://Scenes/Weapons/Snipers/Intervention.tscn" id="7_lodq6"]
+[ext_resource type="PackedScene" uid="uid://dnvfbx028jddk" path="res://Scenes/Weapons/Pistols/1911.tscn" id="5_tvlic"]
+[ext_resource type="PackedScene" uid="uid://5r0rsulu8p0" path="res://Scenes/Weapons/ARs/Galil.tscn" id="7_kr1to"]
+[ext_resource type="PackedScene" uid="uid://bne8rdptvf6cb" path="res://Scenes/Weapons/Pistols/Beretta 92.tscn" id="7_ogoph"]
+[ext_resource type="PackedScene" uid="uid://cmd3jg1y6nve0" path="res://Scenes/Weapons/ARs/AUG.tscn" id="7_v8m7w"]
 [ext_resource type="PackedScene" uid="uid://hs3tt6ej7ebk" path="res://Scenes/GUI/GUI.tscn" id="8_bcjwj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w3ugs"]
-size = Vector2(160, 160)
+size = Vector2(144, 144)
 
 [sub_resource type="Gradient" id="Gradient_sib7k"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -21,8 +21,12 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.824786, 0.136752)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qk4d4"]
+bg_color = Color(1, 1, 1, 1)
+
 [node name="Character" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 128
+collision_mask = 129
 script = ExtResource("1_8a5wn")
 max_ammo = {
 "AR": 200,
@@ -33,17 +37,19 @@ max_ammo = {
 "Special": 200
 }
 ammo = {
-"AR": 200,
-"Energy": 200,
-"Pistol": 200,
-"Shotgun": 200,
-"Sniper": 200,
-"Special": 200
+"AR": 50,
+"Energy": 50,
+"Pistol": 50,
+"Shotgun": 50,
+"Sniper": 50,
+"Special": 50
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("1_ybfct")
+z_index = 100
+texture_filter = 1
+scale = Vector2(4.5, 4.5)
+texture = ExtResource("2_adshr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_w3ugs")
@@ -58,20 +64,20 @@ shape = SubResource("RectangleShape2D_w3ugs")
 
 [node name="Weapons" type="Node2D" parent="."]
 
-[node name="Hornet" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("4_5klr0")]
+[node name="Beretta 92" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("7_ogoph")]
 trackedNode = NodePath("../../cursor_location")
 
-[node name="AA12" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("5_lyr18")]
+[node name="1911" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("5_tvlic")]
 trackedNode = NodePath("../../cursor_location")
 
-[node name="DB" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("6_0m88k")]
+[node name="AUG" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("7_v8m7w")]
 trackedNode = NodePath("../../cursor_location")
-offsetTowardPlayer = -10.0
 
-[node name="Sniper" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("7_lodq6")]
+[node name="Galil" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("7_kr1to")]
 trackedNode = NodePath("../../cursor_location")
 
 [node name="cursor_location" type="Node2D" parent="."]
+visible = false
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 visible = false
@@ -84,8 +90,10 @@ texture = SubResource("GradientTexture2D_6u7it")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Gui" parent="CanvasLayer" instance=ExtResource("8_bcjwj")]
+position = Vector2(24, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 zoom = Vector2(0.4, 0.4)
 
 [node name="DashTimer" type="Timer" parent="."]
@@ -95,6 +103,25 @@ one_shot = true
 [node name="can_dash_timer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="gun_sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(5, 5)
+
+[node name="Health" type="ProgressBar" parent="."]
+z_index = 101
+offset_left = -48.0
+offset_top = -52.0
+offset_right = 48.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/fill = SubResource("StyleBoxFlat_qk4d4")
+value = 100.0
+rounded = true
+fill_mode = 3
+show_percentage = false
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

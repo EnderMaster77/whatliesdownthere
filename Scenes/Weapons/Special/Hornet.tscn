@@ -27,7 +27,6 @@ random_spread = 45.0
 player_weapon = true
 damage = 5.0
 mag_size = 10
-max_bullets_in_storage = 300
 ammo_type = "Special"
 
 [node name="Timer" type="Timer" parent="."]

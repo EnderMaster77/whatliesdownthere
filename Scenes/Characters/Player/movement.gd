@@ -33,7 +33,6 @@ var can_dash: bool = true
 
 func damage(damage: float):
 	health -= damage
-	$CanvasLayer/Gui/Control/Label5.text = "Health: " + str(health)
 	if health <= 0:
 		die()
 
@@ -41,12 +40,15 @@ func die():
 	queue_free()
 
 func _process(delta: float) -> void:
+	$gun_sprite.look_at(get_global_mouse_position())
+	$CanvasLayer/Gui/Control/Label5.text = "Health: " + str(health)
 	if Input.is_action_just_pressed("Switch1"):
 		get_weapons()
 		if weapons[0] != null:
 			disable_weapons()
 			weapons[0].selected = true
 			selectedweapon = weapons[0]
+			$gun_sprite.texture = selectedweapon.gun_texture
 		print("Selected Weapon:",weapons[0])
 	elif Input.is_action_just_pressed("Switch2"):
 		get_weapons()
@@ -54,6 +56,7 @@ func _process(delta: float) -> void:
 			disable_weapons()
 			weapons[1].selected = true
 			selectedweapon = weapons[1]
+			$gun_sprite.texture = selectedweapon.gun_texture
 		print("Selected Weapon:",weapons[1])
 	elif Input.is_action_just_pressed("Switch3"):
 		get_weapons()
@@ -61,6 +64,7 @@ func _process(delta: float) -> void:
 			disable_weapons()			
 			weapons[2].selected = true
 			selectedweapon = weapons[2]
+			$gun_sprite.texture = selectedweapon.gun_texture
 		print("Selected Weapon:",weapons[2])
 	elif Input.is_action_just_pressed("Switch4"):
 		get_weapons()
@@ -68,6 +72,7 @@ func _process(delta: float) -> void:
 			disable_weapons()
 			weapons[3].selected = true
 			selectedweapon = weapons[3]
+			$gun_sprite.texture = selectedweapon.gun_texture
 			
 		print("Selected Weapon:",weapons[3])
 	if Input.is_action_pressed("Fire") && selectedweapon != null:
@@ -83,7 +88,7 @@ func _process(delta: float) -> void:
 		$CanvasLayer/Gui/Control/Label2.text = "Bullets In mag: " + str(selectedweapon.bullets_in_mag)
 		$CanvasLayer/Gui/Control/Label3.text = "Bullets in storage: " + str(ammo[selectedweapon.ammo_type])
 		$CanvasLayer/Gui/Control/Label4.text = "Durability: " + str(selectedweapon.durability)
-
+	$Health.value = health
 
 
 

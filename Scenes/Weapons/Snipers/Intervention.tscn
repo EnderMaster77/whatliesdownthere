@@ -12,7 +12,7 @@ scale = 10.0
 mask = 5
 collideWithBodies = true
 
-[node name="Sniper" type="Spawner"]
+[node name="Intervention" type="Spawner"]
 startMode = 2
 bulletType = SubResource("BulletType_16r2w")
 startTowardPlayer = true

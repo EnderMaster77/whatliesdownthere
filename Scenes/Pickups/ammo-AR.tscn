@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv4eq6hv2gvu2"]
+
+[ext_resource type="Script" path="res://Scenes/Pickups/ammo.gd" id="1_aslii"]
+[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="2_k0j5f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bgcqd"]
+size = Vector2(129, 128)
+
+[node name="ammopack" type="Area2D"]
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("1_aslii")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+texture = ExtResource("2_k0j5f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_bgcqd")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -24,9 +24,8 @@ texture = ExtResource("1_dly1d")
 script = ExtResource("2_qgxd2")
 weapon_name = "FlameThrower"
 player_weapon = true
-damage = 10.0
+damage = 5.0
 mag_size = 200
-max_bullets_in_storage = 300
 ammo_type = "Energy"
 
 [node name="Timer" type="Timer" parent="."]

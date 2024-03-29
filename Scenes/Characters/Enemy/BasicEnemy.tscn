@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bh1ic0el6jv4c"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Enemy/BasicEnemy.gd" id="1_34a26"]
-[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_j0r05"]
+[ext_resource type="Texture2D" uid="uid://cyq332mat6op0" path="res://Assets/Characters/enemy.png" id="2_ouh4q"]
 [ext_resource type="Script" path="res://Scenes/Characters/Enemy/Area2D.gd" id="3_yrvmv"]
 [ext_resource type="PackedScene" uid="uid://bne8rdptvf6cb" path="res://Scenes/Weapons/Pistols/Beretta 92.tscn" id="4_06g56"]
 [ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="5_o37sf"]
@@ -14,7 +14,7 @@ radius = 63.0
 [sub_resource type="BulletType" id="BulletType_5taxc"]
 initialSpeed = 500.0
 _shape = SubResource("CircleShape2D_fxl3v")
-scale = 10.0
+scale = 5.0
 mask = 3
 collideWithBodies = true
 
@@ -26,8 +26,10 @@ wall_min_slide_angle = 0.0174533
 script = ExtResource("1_34a26")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
-texture = ExtResource("1_j0r05")
+z_index = 98
+texture_filter = 1
+scale = Vector2(4.5, 4.5)
+texture = ExtResource("2_ouh4q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jup6i")
@@ -36,7 +38,6 @@ debug_color = Color(0, 0.6, 0, 0.419608)
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 target_desired_distance = 30.0
 path_postprocessing = 1
-avoidance_enabled = true
 radius = 248.56
 max_neighbors = 3
 avoidance_layers = 2
@@ -61,8 +62,6 @@ debug_color = Color(0, 0.6, 0, 0.419608)
 
 [node name="Weapon" parent="." instance=ExtResource("4_06g56")]
 bulletType = SubResource("BulletType_5taxc")
-startTowardPlayer = true
-staysTowardPlayer = true
 texture = ExtResource("5_o37sf")
 player_weapon = false
 damage = 10.0

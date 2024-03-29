@@ -245,4 +245,5 @@ func _on_bordertimer_timeout() -> void:
 	var spawnpoint = Node2D.new()
 	spawnpoint.position = tilemap.map_to_local(room_positions[0])
 	tilemap.add_child(spawnpoint)
-	$Character.global_position = spawnpoint.global_position
+	if Engine.is_editor_hint() == false:
+		$Character.global_position = spawnpoint.global_position

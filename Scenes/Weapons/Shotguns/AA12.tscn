@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbvgewg8najg1"]
+[gd_scene load_steps=6 format=3 uid="uid://cbvgewg8najg1"]
 
-[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_g775j"]
+[ext_resource type="Texture2D" uid="uid://dy12h5hpgvayw" path="res://Assets/pro bullet.png" id="1_slff2"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_7emvs"]
+[ext_resource type="Texture2D" uid="uid://ci4fruv4epk6w" path="res://Assets/aa12.png" id="3_itpma"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
 
 [sub_resource type="BulletType" id="BulletType_16r2w"]
 initialSpeed = 650.0
 _shape = SubResource("CircleShape2D_5vocg")
+scale = 5.0
 mask = 5
 collideWithBodies = true
 
@@ -19,13 +21,13 @@ bulletsPerRadius = 12
 startTowardPlayer = true
 staysTowardPlayer = true
 offsetTowardPlayer = -45.0
-texture = ExtResource("1_g775j")
+texture = ExtResource("1_slff2")
 script = ExtResource("2_7emvs")
+gun_texture = ExtResource("3_itpma")
 weapon_name = "AA12"
 player_weapon = true
 damage = 5.0
 mag_size = 20
-max_bullets_in_storage = 24
 durability = 80.0
 
 [node name="Timer" type="Timer" parent="."]
