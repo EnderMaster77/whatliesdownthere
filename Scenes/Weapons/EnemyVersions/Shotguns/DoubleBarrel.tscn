@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddspa7lwll6fo"]
+
+[ext_resource type="BulletType" uid="uid://r3m4lj16gs6h" path="res://Scenes/Weapons/EnemyVersions/ARs/ebullet.tres" id="1_f54on"]
+[ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="2_ac45t"]
+[ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_f86g8"]
+[ext_resource type="Texture2D" uid="uid://dnah5qpcr4ngr" path="res://Assets/sawn off.png" id="3_5o5jv"]
+
+[node name="Weapon" type="Spawner"]
+startMode = 2
+bulletType = ExtResource("1_f54on")
+fireRadiusDegrees = 20.0
+bulletsPerRadius = 12
+startTowardPlayer = true
+staysTowardPlayer = true
+offsetTowardPlayer = -10.0
+texture = ExtResource("2_ac45t")
+script = ExtResource("2_f86g8")
+gun_texture = ExtResource("3_5o5jv")
+weapon_name = "Double-Barrel Shotgun"
+player_weapon = true
+damage = 7.0
+mag_size = 2
+durability = 26.0
+ammo_type = "Shotgun"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+
+[node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 1.75
+one_shot = true
+
+[connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

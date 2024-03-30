@@ -1,0 +1,8 @@
+[gd_resource type="BulletType" load_steps=2 format=3 uid="uid://cjvprmkx2gv1j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pitin"]
+
+[resource]
+initialSpeed = 800.0
+_shape = SubResource("CircleShape2D_pitin")
+scale = 5.0

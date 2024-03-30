@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cu5cd008gx2jw"]
+
+[ext_resource type="BulletType" uid="uid://r3m4lj16gs6h" path="res://Scenes/Weapons/EnemyVersions/ARs/ebullet.tres" id="1_8l5cw"]
+[ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="2_2urac"]
+[ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_axeo2"]
+[ext_resource type="Texture2D" uid="uid://g7cmiaiif2j" path="res://Assets/galil.png" id="3_6tjio"]
+
+[node name="Weapon" type="Spawner"]
+startMode = 2
+bulletType = ExtResource("1_8l5cw")
+startTowardPlayer = true
+staysTowardPlayer = true
+texture = ExtResource("2_2urac")
+script = ExtResource("2_axeo2")
+gun_texture = ExtResource("3_6tjio")
+weapon_name = "Galil"
+player_weapon = true
+damage = 23.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.15
+
+[node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

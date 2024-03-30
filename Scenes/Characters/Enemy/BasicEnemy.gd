@@ -10,6 +10,10 @@ var ammofab := preload("res://Scenes/Pickups/ammo-pistol.tscn")
 var on_screen: bool = false
 @export var max_health: float= 100
 @export var health: float = 50
+
+func _ready() -> void:
+	$WeaponSprite.texture = $Weapon.gun_texture
+
 func damage(damage: float):
 	health -= damage
 	
@@ -17,7 +21,7 @@ func damage(damage: float):
 		randomize()
 		var r = randf()
 		print(r)
-		if r >= .50:
+		if r >= .30:
 			var randnum: float = randf()
 			if randnum > .80:
 				print("Drop Weapon")
@@ -64,6 +68,7 @@ func makepath() -> void:
 		return
 	elif LOS_check.get_collider().is_in_group("Player") && on_screen == true:
 		nav_agent.target_position = player.global_position
+		$WeaponSprite.look_at(nav_agent.target_position)
 func _on_timer_timeout() -> void:
 	makepath()
 

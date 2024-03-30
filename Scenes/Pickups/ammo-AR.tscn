@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cv4eq6hv2gvu2"]
+[gd_scene load_steps=4 format=3 uid="uid://baw2r7ax60xdq"]
 
-[ext_resource type="Script" path="res://Scenes/Pickups/ammo.gd" id="1_aslii"]
-[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="2_k0j5f"]
+[ext_resource type="Script" path="res://Scenes/Pickups/ammo-pickup.gd" id="1_jb5eg"]
+[ext_resource type="Texture2D" uid="uid://bygv4myrfr6fb" path="res://Assets/pistol.png" id="2_yjygf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bgcqd"]
 size = Vector2(129, 128)
@@ -9,11 +9,13 @@ size = Vector2(129, 128)
 [node name="ammopack" type="Area2D"]
 collision_layer = 128
 collision_mask = 128
-script = ExtResource("1_aslii")
+script = ExtResource("1_jb5eg")
+ammo_gained = 80
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0, 1, 0, 1)
-texture = ExtResource("2_k0j5f")
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("2_yjygf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)

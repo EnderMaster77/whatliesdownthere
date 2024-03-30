@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpnmkc7bpg8gj"]
+
+[ext_resource type="Texture2D" uid="uid://dy12h5hpgvayw" path="res://Assets/pro bullet.png" id="1_0wgne"]
+[ext_resource type="BulletType" uid="uid://cjvprmkx2gv1j" path="res://Scenes/Weapons/EnemyVersions/Snipers/sniper.tres" id="1_ry4qc"]
+[ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_6dfws"]
+[ext_resource type="Texture2D" uid="uid://cabs30dn2c4a1" path="res://Assets/svd.png" id="3_nshf4"]
+
+[node name="Weapon" type="Spawner"]
+startMode = 2
+bulletType = ExtResource("1_ry4qc")
+startTowardPlayer = true
+staysTowardPlayer = true
+texture = ExtResource("1_0wgne")
+script = ExtResource("2_6dfws")
+gun_texture = ExtResource("3_nshf4")
+weapon_name = "SVD"
+random_spread = 5.0
+player_weapon = true
+damage = 45.0
+mag_size = 10
+durability = 50.0
+ammo_type = "Sniper"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+
+[node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 1.25
+one_shot = true
+
+[connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

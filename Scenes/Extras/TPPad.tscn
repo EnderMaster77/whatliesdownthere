@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3tx4xctyit0p"]
+
+[ext_resource type="Script" path="res://Scenes/Extras/TPPad.gd" id="1_r5try"]
+[ext_resource type="Texture2D" uid="uid://cufd3gtbp8dyf" path="res://Assets/portal.png" id="2_wib87"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w5aje"]
+radius = 101.079
+
+[node name="TpPad" type="Area2D"]
+scale = Vector2(3, 3)
+collision_layer = 0
+collision_mask = 128
+script = ExtResource("1_r5try")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+shape = SubResource("CircleShape2D_w5aje")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(5, 5)
+texture = ExtResource("2_wib87")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="body_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_exited" from="." to="." method="_on_area_exited"]

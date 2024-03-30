@@ -7,6 +7,8 @@ class_name Weapon
 
 @export var weapon_name: String ## Name Of the Weapon.
 
+@export var weapon_ammo_pack: PackedScene
+
 @export var random_spread: float = 0 ## The range where bullets can randomly travel away from the target.
 
 @export var player_weapon: bool = false ## Turn on if weapon is going to be for player. If for bots, keep turned off.

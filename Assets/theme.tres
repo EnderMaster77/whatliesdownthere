@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://6vtboj1uvhuh"]
+
+[ext_resource type="FontFile" uid="uid://do52rkxf26ptl" path="res://Assets/pixpopenei/pixpopenei.ttf" id="1_857ni"]
+
+[resource]
+default_font = ExtResource("1_857ni")
+Button/fonts/font = ExtResource("1_857ni")
+Label/fonts/font = ExtResource("1_857ni")

@@ -1,14 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2tuntuqbkt3n"]
+[gd_scene load_steps=6 format=3 uid="uid://d2tuntuqbkt3n"]
 
-[ext_resource type="Texture2D" uid="uid://b2ihu7nqd2ha7" path="res://Assets/Art/mybullet.png" id="1_koxsn"]
+[ext_resource type="Texture2D" uid="uid://dy12h5hpgvayw" path="res://Assets/pro bullet.png" id="1_02vyh"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_tu280"]
+[ext_resource type="Texture2D" uid="uid://cabs30dn2c4a1" path="res://Assets/svd.png" id="3_5m3du"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
 
 [sub_resource type="BulletType" id="BulletType_16r2w"]
 initialSpeed = 950.0
 _shape = SubResource("CircleShape2D_5vocg")
-scale = 10.0
+scale = 5.0
 mask = 5
 collideWithBodies = true
 
@@ -17,9 +18,11 @@ startMode = 2
 bulletType = SubResource("BulletType_16r2w")
 startTowardPlayer = true
 staysTowardPlayer = true
-texture = ExtResource("1_koxsn")
+texture = ExtResource("1_02vyh")
 script = ExtResource("2_tu280")
+gun_texture = ExtResource("3_5m3du")
 weapon_name = "SVD"
+random_spread = 5.0
 player_weapon = true
 damage = 45.0
 mag_size = 10

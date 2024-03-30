@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdy7yvydy6qod"]
+[gd_scene load_steps=6 format=3 uid="uid://cdy7yvydy6qod"]
 
 [ext_resource type="Texture2D" uid="uid://dy12h5hpgvayw" path="res://Assets/pro bullet.png" id="1_mtjup"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_rgdrq"]
+[ext_resource type="Texture2D" uid="uid://dnah5qpcr4ngr" path="res://Assets/sawn off.png" id="3_xcx1y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
 
 [sub_resource type="BulletType" id="BulletType_16r2w"]
 initialSpeed = 650.0
 _shape = SubResource("CircleShape2D_5vocg")
+scale = 5.0
 mask = 5
 collideWithBodies = true
 
@@ -18,9 +20,10 @@ fireRadiusDegrees = 20.0
 bulletsPerRadius = 12
 startTowardPlayer = true
 staysTowardPlayer = true
-offsetTowardPlayer = 32.5
+offsetTowardPlayer = -10.0
 texture = ExtResource("1_mtjup")
 script = ExtResource("2_rgdrq")
+gun_texture = ExtResource("3_xcx1y")
 weapon_name = "Double-Barrel Shotgun"
 player_weapon = true
 damage = 7.0

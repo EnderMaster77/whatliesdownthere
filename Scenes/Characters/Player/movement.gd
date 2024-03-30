@@ -41,7 +41,6 @@ func die():
 
 func _process(delta: float) -> void:
 	$gun_sprite.look_at(get_global_mouse_position())
-	$CanvasLayer/Gui/Control/Label5.text = "Health: " + str(health)
 	if Input.is_action_just_pressed("Switch1"):
 		get_weapons()
 		if weapons[0] != null:
@@ -81,13 +80,19 @@ func _process(delta: float) -> void:
 		selectedweapon.reload()
 	if Input.is_action_just_pressed("Throw Weapon") && selectedweapon != null:
 		selectedweapon.throw()
+		$gun_sprite.texture = null
 		selectedweapon = null
 	$cursor_location.global_position = get_global_mouse_position()
 	if selectedweapon != null:
-		$CanvasLayer/Gui/Control/Label.text = "Weapon: " + str(selectedweapon.name)
-		$CanvasLayer/Gui/Control/Label2.text = "Bullets In mag: " + str(selectedweapon.bullets_in_mag)
-		$CanvasLayer/Gui/Control/Label3.text = "Bullets in storage: " + str(ammo[selectedweapon.ammo_type])
-		$CanvasLayer/Gui/Control/Label4.text = "Durability: " + str(selectedweapon.durability)
+		$CanvasLayer/Gui/Control/Label.text = str(selectedweapon.name)
+		$CanvasLayer/Gui/Control/Label2.text = str(selectedweapon.bullets_in_mag)
+		$CanvasLayer/Gui/Control/Label3.text = str(ammo[selectedweapon.ammo_type])
+		$CanvasLayer/Gui/Control/Label4.text = str(selectedweapon.durability)
+	else:
+		$CanvasLayer/Gui/Control/Label.text = "None"
+		$CanvasLayer/Gui/Control/Label2.text = "N/A"
+		$CanvasLayer/Gui/Control/Label3.text = "N/A"
+		$CanvasLayer/Gui/Control/Label4.text = "N/A"
 	$Health.value = health
 
 
@@ -150,3 +155,11 @@ func _on_dash_timer_timeout() -> void:
 func _on_can_dash_timer_timeout() -> void:
 	print("DASH")
 	can_dash = true
+
+
+func _on_tptolevel_start() -> void:
+	$CanvasLayer/Gui/Control/TextureRect.show()
+
+
+func _on_tptolevel_finished() -> void:
+	$CanvasLayer/Gui/Control/TextureRect.hide()

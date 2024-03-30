@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbagosxxk0fxb"]
+
+[ext_resource type="BulletType" uid="uid://cjvprmkx2gv1j" path="res://Scenes/Weapons/EnemyVersions/Snipers/sniper.tres" id="1_03wh8"]
+[ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="1_a2ss8"]
+[ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_fx3uq"]
+[ext_resource type="Texture2D" uid="uid://cyspy26aogu5e" path="res://Assets/m200.png" id="3_oys4f"]
+
+[node name="Weapon" type="Spawner"]
+startMode = 2
+bulletType = ExtResource("1_03wh8")
+startTowardPlayer = true
+staysTowardPlayer = true
+texture = ExtResource("1_a2ss8")
+script = ExtResource("2_fx3uq")
+gun_texture = ExtResource("3_oys4f")
+weapon_name = "AR"
+player_weapon = true
+damage = 55.0
+mag_size = 7
+durability = 40.0
+ammo_type = "Sniper"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.75
+
+[node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 1.25
+one_shot = true
+
+[connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

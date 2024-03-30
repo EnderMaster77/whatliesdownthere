@@ -1,0 +1,100 @@
+[gd_scene load_steps=3 format=3 uid="uid://jxwjvcp6lvue"]
+
+[ext_resource type="Theme" uid="uid://6vtboj1uvhuh" path="res://Assets/theme.tres" id="1_3ey47"]
+[ext_resource type="Script" path="res://Scenes/Menus/MainMenu.gd" id="1_xdsx4"]
+
+[node name="MainMenu" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xdsx4")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 64.0
+offset_right = 1472.0
+offset_bottom = 176.0
+theme = ExtResource("1_3ey47")
+theme_override_font_sizes/font_size = 80
+text = "What Lies Down There"
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 256.0
+offset_right = 1536.0
+offset_bottom = 384.0
+theme = ExtResource("1_3ey47")
+theme_override_font_sizes/font_size = 50
+text = "Start"
+
+[node name="Credits2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 448.0
+offset_right = 1536.0
+offset_bottom = 576.0
+theme = ExtResource("1_3ey47")
+theme_override_font_sizes/font_size = 50
+text = "Credits"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 640.0
+offset_right = 1536.0
+offset_bottom = 768.0
+theme = ExtResource("1_3ey47")
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+
+[node name="Credits" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Credits"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 192.0
+offset_right = 1096.0
+offset_bottom = 760.0
+theme = ExtResource("1_3ey47")
+theme_override_font_sizes/font_size = 60
+text = "Development: EnderMaster08
+Art and Music: ungodly"
+
+[node name="Label2" type="Label" parent="Credits"]
+layout_mode = 0
+offset_left = 1152.0
+offset_top = 192.0
+offset_right = 1912.0
+offset_bottom = 760.0
+theme = ExtResource("1_3ey47")
+theme_override_font_sizes/font_size = 40
+text = "Testers:
+-
+-
+-
+-
+-
+-"
+
+[node name="Back" type="Button" parent="Credits"]
+layout_mode = 0
+offset_top = 896.0
+offset_right = 448.0
+offset_bottom = 1080.0
+theme = ExtResource("1_3ey47")
+theme_override_font_sizes/font_size = 80
+text = "Back"
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Credits2" to="." method="_on_credits_2_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

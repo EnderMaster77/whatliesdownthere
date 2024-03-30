@@ -1,0 +1,9 @@
+[gd_resource type="BulletType" load_steps=2 format=3 uid="uid://r3m4lj16gs6h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ynoh"]
+
+[resource]
+initialSpeed = 500.0
+_shape = SubResource("CircleShape2D_6ynoh")
+scale = 5.0
+mask = 3
