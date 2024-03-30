@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://btqluc7vvectn"]
+[gd_scene load_steps=32 format=3 uid="uid://btqluc7vvectn"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/TestWorldGen.gd" id="1_4o8nm"]
 [ext_resource type="Texture2D" uid="uid://cjw6jmqvwj7r2" path="res://Assets/Art/tileset.png" id="1_a1130"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://b4sfovg1rdx2x" path="res://Assets/Art/Wooden Planks.png" id="4_bhaiu"]
 [ext_resource type="PackedScene" uid="uid://bp5bx24lhr0wd" path="res://Scenes/Characters/Player/character.tscn" id="4_fksjc"]
 [ext_resource type="PackedScene" uid="uid://b3tx4xctyit0p" path="res://Scenes/Extras/TPPad.tscn" id="6_ibn47"]
+[ext_resource type="PackedScene" uid="uid://sdik2bpaqlyv" path="res://Scenes/Weapons/EnemyVersions/Pistols/1911.tscn" id="7_04km4"]
 [ext_resource type="Script" path="res://addons/PerfBullets/GDScript_Classes/PatternManager.gd" id="7_xpkce"]
+[ext_resource type="PackedScene" uid="uid://dmqsknfe86sff" path="res://Scenes/Weapons/EnemyVersions/Pistols/Beretta 92.tscn" id="8_d35bj"]
 [ext_resource type="Theme" uid="uid://6vtboj1uvhuh" path="res://Assets/theme.tres" id="8_g700h"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_jgxk7"]
@@ -491,6 +493,8 @@ z_index = -2
 position = Vector2(1500, -8000)
 floor_tile = Vector2i(3, 2)
 wall_tile = Vector2i(1, 1)
+weapon1 = ExtResource("7_04km4")
+weapon2 = ExtResource("8_d35bj")
 
 [node name="TPTOLEVEL2" parent="." instance=ExtResource("6_ibn47")]
 z_index = -2

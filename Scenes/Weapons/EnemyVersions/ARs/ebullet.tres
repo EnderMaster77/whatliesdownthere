@@ -7,3 +7,4 @@ initialSpeed = 500.0
 _shape = SubResource("CircleShape2D_6ynoh")
 scale = 5.0
 mask = 3
+collideWithBodies = true

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://joj6x3natxy6"]
+[gd_scene load_steps=6 format=3 uid="uid://joj6x3natxy6"]
 
 [ext_resource type="BulletType" uid="uid://r3m4lj16gs6h" path="res://Scenes/Weapons/EnemyVersions/ARs/ebullet.tres" id="1_me2ro"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_3fnw6"]
 [ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="2_s2lpl"]
 [ext_resource type="Texture2D" uid="uid://cnk4ym02t4von" path="res://Assets/Guns/aug.png" id="3_2d66h"]
+[ext_resource type="PackedScene" uid="uid://baw2r7ax60xdq" path="res://Scenes/Pickups/ammo-AR.tscn" id="5_ulap5"]
 
 [node name="Weapon" type="Spawner"]
 startMode = 2
@@ -14,6 +15,7 @@ texture = ExtResource("2_s2lpl")
 script = ExtResource("2_3fnw6")
 gun_texture = ExtResource("3_2d66h")
 weapon_name = "AUG A1"
+weapon_ammo_pack = ExtResource("5_ulap5")
 mag_size = 42
 
 [node name="Timer" type="Timer" parent="."]

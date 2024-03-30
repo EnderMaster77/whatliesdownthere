@@ -11,8 +11,8 @@ var on_screen: bool = false
 @export var max_health: float= 100
 @export var health: float = 50
 
-func _ready() -> void:
-	$WeaponSprite.texture = $Weapon.gun_texture
+#func _ready() -> void:
+#	$WeaponSprite.texture = $Weapon.gun_texture
 
 func damage(damage: float):
 	health -= damage
@@ -47,6 +47,7 @@ func die():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
 	if player != null:
 		LOS_check.target_position = to_local(player.global_position)
 	if nav_agent.is_target_reached() == false:
@@ -55,11 +56,13 @@ func _process(delta: float) -> void:
 		velocity.y = dir.y * SPEED
 	else:
 		velocity = Vector2.ZERO
-	if $Weapon.can_fire == true:
-		if LOS_check.get_collider() == null:
-			return
-		elif LOS_check.get_collider().is_in_group("Player") && on_screen == true:
-			$Weapon.fire()
+	if $Weapon != null:
+		$WeaponSprite.texture = $Weapon.gun_texture
+		if $Weapon.can_fire == true:
+			if LOS_check.get_collider() == null:
+				return
+			elif LOS_check.get_collider().is_in_group("Player") && on_screen == true:
+				$Weapon.fire()
 	move_and_slide()
 	
 

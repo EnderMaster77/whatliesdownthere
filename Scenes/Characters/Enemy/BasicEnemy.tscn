@@ -1,18 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bh1ic0el6jv4c"]
+[gd_scene load_steps=5 format=3 uid="uid://bh1ic0el6jv4c"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Enemy/BasicEnemy.gd" id="1_34a26"]
 [ext_resource type="Texture2D" uid="uid://cyq332mat6op0" path="res://Assets/Characters/enemy.png" id="2_ouh4q"]
 [ext_resource type="Script" path="res://Scenes/Characters/Enemy/Area2D.gd" id="3_yrvmv"]
-[ext_resource type="PackedScene" uid="uid://bne8rdptvf6cb" path="res://Scenes/Weapons/Pistols/Beretta 92.tscn" id="4_06g56"]
-[ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="5_o37sf"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_espsb"]
-
-[sub_resource type="BulletType" id="BulletType_mxewd"]
-initialSpeed = 500.0
-_shape = SubResource("CircleShape2D_espsb")
-scale = 5.0
-mask = 3
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jup6i"]
 radius = 63.0
@@ -23,11 +13,6 @@ collision_mask = 5
 motion_mode = 1
 wall_min_slide_angle = 0.0174533
 script = ExtResource("1_34a26")
-
-[node name="Weapon" parent="." instance=ExtResource("4_06g56")]
-bulletType = SubResource("BulletType_mxewd")
-texture = ExtResource("5_o37sf")
-player_weapon = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 98

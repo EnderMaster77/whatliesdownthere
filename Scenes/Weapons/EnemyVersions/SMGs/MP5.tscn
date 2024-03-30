@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwlt5g1rbsmeq"]
+[gd_scene load_steps=6 format=3 uid="uid://bwlt5g1rbsmeq"]
 
 [ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="1_jdh8i"]
 [ext_resource type="BulletType" uid="uid://r3m4lj16gs6h" path="res://Scenes/Weapons/EnemyVersions/ARs/ebullet.tres" id="1_w6iqn"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_2rrr4"]
 [ext_resource type="Texture2D" uid="uid://dv783oc4ax85c" path="res://Assets/mp5.png" id="3_vi3sv"]
+[ext_resource type="PackedScene" uid="uid://cyxldbwmxsxpd" path="res://Scenes/Pickups/ammo-pistol.tscn" id="5_4qchd"]
 
 [node name="Weapon" type="Spawner"]
 startMode = 2
@@ -14,6 +15,7 @@ texture = ExtResource("1_jdh8i")
 script = ExtResource("2_2rrr4")
 gun_texture = ExtResource("3_vi3sv")
 weapon_name = "MP5"
+weapon_ammo_pack = ExtResource("5_4qchd")
 random_spread = 22.5
 player_weapon = true
 damage = 15.0

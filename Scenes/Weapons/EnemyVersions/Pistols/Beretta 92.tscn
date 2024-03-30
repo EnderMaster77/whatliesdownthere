@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmqsknfe86sff"]
+[gd_scene load_steps=6 format=3 uid="uid://dmqsknfe86sff"]
 
 [ext_resource type="BulletType" uid="uid://r3m4lj16gs6h" path="res://Scenes/Weapons/EnemyVersions/ARs/ebullet.tres" id="1_e07bb"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_86vqh"]
 [ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="2_357ti"]
 [ext_resource type="Texture2D" uid="uid://bg45fsr7mt4fl" path="res://Assets/Guns/beretta.png" id="3_lnpcp"]
+[ext_resource type="PackedScene" uid="uid://cyxldbwmxsxpd" path="res://Scenes/Pickups/ammo-pistol.tscn" id="5_x6wjm"]
 
 [node name="Weapon" type="Spawner"]
 startMode = 2
@@ -14,6 +15,7 @@ texture = ExtResource("2_357ti")
 script = ExtResource("2_86vqh")
 gun_texture = ExtResource("3_lnpcp")
 weapon_name = "Beretta 92"
+weapon_ammo_pack = ExtResource("5_x6wjm")
 random_spread = 10.0
 player_weapon = true
 damage = 15.0

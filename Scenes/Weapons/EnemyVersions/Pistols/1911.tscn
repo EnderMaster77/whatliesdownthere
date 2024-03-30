@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://sdik2bpaqlyv"]
+[gd_scene load_steps=6 format=3 uid="uid://sdik2bpaqlyv"]
 
 [ext_resource type="BulletType" uid="uid://r3m4lj16gs6h" path="res://Scenes/Weapons/EnemyVersions/ARs/ebullet.tres" id="1_7op7g"]
 [ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="2_45g5d"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_pmgjs"]
 [ext_resource type="Texture2D" uid="uid://bx7ng74s8pdxj" path="res://Assets/Guns/1911.png" id="3_xiw08"]
+[ext_resource type="PackedScene" uid="uid://cyxldbwmxsxpd" path="res://Scenes/Pickups/ammo-pistol.tscn" id="5_7pdg2"]
 
 [node name="Weapon" type="Spawner"]
 startMode = 2
@@ -14,6 +15,7 @@ texture = ExtResource("2_45g5d")
 script = ExtResource("2_pmgjs")
 gun_texture = ExtResource("3_xiw08")
 weapon_name = "1911"
+weapon_ammo_pack = ExtResource("5_7pdg2")
 random_spread = 10.0
 player_weapon = true
 damage = 22.0

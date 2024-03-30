@@ -10,7 +10,7 @@ size = Vector2(129, 128)
 collision_layer = 128
 collision_mask = 128
 script = ExtResource("1_2r4iy")
-ammo_gained = 80
+ammo_type = "Pistol"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

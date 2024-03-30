@@ -234,10 +234,18 @@ func make_room(rec:int,room_num:int, gun1,gun2):
 
 func spawn_enemy(location: Vector2i, gun1, gun2):
 	var enemy = enemyfab.instantiate()
+	var weapon
+	if randf() > .50:
+		weapon = gun1.instantiate()
+	else:
+		weapon = gun2.instantiate()
+	print(weapon)
 	enemy.player = $Character
-	enemy.get_child(0).trackedNode = $Character
+	weapon.trackedNode = $Character
 	enemy.position = tilemap.map_to_local(location)
 	enemy.scale = enemy.scale / tilemap.scale
+	weapon.player_weapon = false
+	enemy.add_child(weapon)
 	tilemap.add_child(enemy)
 
 
@@ -248,12 +256,10 @@ func _on_bordertimer_timeout() -> void:
 	var distance: float = 0
 	for point1 in room_positions:
 		for point2 in room_positions:
-			print(point1,point2,point1.distance_squared_to(point2))
 			if point1.distance_squared_to(point2) > distance:# && pointa != pointb:
 				distance = point1.distance_squared_to(point2)
 				pointa = point1
 				pointb = point2
-				print(point1.distance_squared_to(point2))
 	
 	var spawnpoint = Node2D.new()
 	var bosspoint = Node2D.new()
@@ -266,11 +272,9 @@ func _on_bordertimer_timeout() -> void:
 		$TPTOLEVEL.target_location = spawnpoint.global_position
 		$TPTOLEVEL.show()
 		finished.emit()
-		print("FINISH!")
 	for child in $TileMap.get_children():
 		if child.is_in_group("Enemy"):
 			if sqrt(child.global_position.distance_squared_to(spawnpoint.global_position)) < 2000:
-				print("Child",sqrt(child.global_position.distance_squared_to(spawnpoint.global_position)))
 				child.queue_free()
 	
 

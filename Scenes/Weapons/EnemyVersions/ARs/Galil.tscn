@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cu5cd008gx2jw"]
+[gd_scene load_steps=6 format=3 uid="uid://cu5cd008gx2jw"]
 
 [ext_resource type="BulletType" uid="uid://r3m4lj16gs6h" path="res://Scenes/Weapons/EnemyVersions/ARs/ebullet.tres" id="1_8l5cw"]
 [ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="2_2urac"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_axeo2"]
 [ext_resource type="Texture2D" uid="uid://g7cmiaiif2j" path="res://Assets/galil.png" id="3_6tjio"]
+[ext_resource type="PackedScene" uid="uid://baw2r7ax60xdq" path="res://Scenes/Pickups/ammo-AR.tscn" id="5_j7j7y"]
 
 [node name="Weapon" type="Spawner"]
 startMode = 2
@@ -14,6 +15,7 @@ texture = ExtResource("2_2urac")
 script = ExtResource("2_axeo2")
 gun_texture = ExtResource("3_6tjio")
 weapon_name = "Galil"
+weapon_ammo_pack = ExtResource("5_j7j7y")
 player_weapon = true
 damage = 23.0
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddspa7lwll6fo"]
+[gd_scene load_steps=6 format=3 uid="uid://ddspa7lwll6fo"]
 
 [ext_resource type="BulletType" uid="uid://r3m4lj16gs6h" path="res://Scenes/Weapons/EnemyVersions/ARs/ebullet.tres" id="1_f54on"]
 [ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="2_ac45t"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_f86g8"]
 [ext_resource type="Texture2D" uid="uid://dnah5qpcr4ngr" path="res://Assets/sawn off.png" id="3_5o5jv"]
+[ext_resource type="PackedScene" uid="uid://b2a57bmdpvmf3" path="res://Scenes/Pickups/ammo-shotgun.tscn" id="5_xo4nf"]
 
 [node name="Weapon" type="Spawner"]
 startMode = 2
@@ -17,6 +18,7 @@ texture = ExtResource("2_ac45t")
 script = ExtResource("2_f86g8")
 gun_texture = ExtResource("3_5o5jv")
 weapon_name = "Double-Barrel Shotgun"
+weapon_ammo_pack = ExtResource("5_xo4nf")
 player_weapon = true
 damage = 7.0
 mag_size = 2
