@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://bp5bx24lhr0wd"]
+[gd_scene load_steps=16 format=3 uid="uid://bp5bx24lhr0wd"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player/movement.gd" id="1_8a5wn"]
+[ext_resource type="Shader" path="res://Scenes/Levels/vhs.gdshader" id="1_8y3ve"]
 [ext_resource type="Texture2D" uid="uid://nauiwoxx1oun" path="res://Assets/Characters/player.png" id="2_adshr"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/hitbox.gd" id="3_umwci"]
 [ext_resource type="PackedScene" uid="uid://cc0fl588uxjrg" path="res://Scenes/Weapons/SMGs/MP5.tscn" id="5_k6vjo"]
@@ -24,6 +25,13 @@ fill_to = Vector2(0.824786, 0.136752)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qk4d4"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_enf6u"]
+shader = ExtResource("1_8y3ve")
+shader_parameter/wiggle = 0.03
+shader_parameter/wiggle_speed = 25.0
+shader_parameter/smear = 0.3
+shader_parameter/blur_samples = 5
 
 [node name="Character" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 128
@@ -136,6 +144,16 @@ show_percentage = false
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_2khpg")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+material = SubResource("ShaderMaterial_enf6u")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
