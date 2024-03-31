@@ -105,6 +105,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Dash") && can_dash == true:
 		$DashTimer.start()
+		$AudioStreamPlayer2D.play()
 		can_dash = false
 		dashing = true
 		velocity *= 4

@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmqsknfe86sff"]
+[gd_scene load_steps=8 format=3 uid="uid://dmqsknfe86sff"]
 
 [ext_resource type="BulletType" uid="uid://r3m4lj16gs6h" path="res://Scenes/Weapons/EnemyVersions/ARs/ebullet.tres" id="1_e07bb"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_86vqh"]
 [ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="2_357ti"]
 [ext_resource type="Texture2D" uid="uid://bg45fsr7mt4fl" path="res://Assets/Guns/beretta.png" id="3_lnpcp"]
+[ext_resource type="PackedScene" uid="uid://bne8rdptvf6cb" path="res://Scenes/Weapons/Pistols/Beretta 92.tscn" id="5_jddks"]
 [ext_resource type="PackedScene" uid="uid://cyxldbwmxsxpd" path="res://Scenes/Pickups/ammo-pistol.tscn" id="5_x6wjm"]
+[ext_resource type="AudioStream" uid="uid://bj34lxktv5iut" path="res://Assets/SFX/pistol.wav" id="7_8x1gm"]
 
 [node name="Weapon" type="Spawner"]
 startMode = 2
@@ -14,6 +16,7 @@ staysTowardPlayer = true
 texture = ExtResource("2_357ti")
 script = ExtResource("2_86vqh")
 gun_texture = ExtResource("3_lnpcp")
+player_version = ExtResource("5_jddks")
 weapon_name = "Beretta 92"
 weapon_ammo_pack = ExtResource("5_x6wjm")
 random_spread = 10.0
@@ -28,6 +31,10 @@ wait_time = 0.3
 [node name="ReloadTimer" type="Timer" parent="."]
 wait_time = 0.75
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_8x1gm")
+max_distance = 4000.0
 
 [connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

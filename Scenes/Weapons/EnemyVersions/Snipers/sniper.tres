@@ -3,6 +3,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_pitin"]
 
 [resource]
-initialSpeed = 800.0
+initialSpeed = 850.0
 _shape = SubResource("CircleShape2D_pitin")
 scale = 5.0
+mask = 3
+collideWithBodies = true

@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bp5bx24lhr0wd"]
+[gd_scene load_steps=14 format=3 uid="uid://bp5bx24lhr0wd"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player/movement.gd" id="1_8a5wn"]
 [ext_resource type="Texture2D" uid="uid://nauiwoxx1oun" path="res://Assets/Characters/player.png" id="2_adshr"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/hitbox.gd" id="3_umwci"]
+[ext_resource type="PackedScene" uid="uid://cc0fl588uxjrg" path="res://Scenes/Weapons/SMGs/MP5.tscn" id="5_k6vjo"]
 [ext_resource type="PackedScene" uid="uid://bne8rdptvf6cb" path="res://Scenes/Weapons/Pistols/Beretta 92.tscn" id="7_ogoph"]
 [ext_resource type="Texture2D" uid="uid://bbcap52epem48" path="res://Assets/Art/bg.png" id="8_b41lw"]
 [ext_resource type="PackedScene" uid="uid://hs3tt6ej7ebk" path="res://Scenes/GUI/GUI.tscn" id="8_bcjwj"]
+[ext_resource type="AudioStream" uid="uid://dsur5gdte6wql" path="res://Assets/SFX/dash.wav" id="9_2khpg"]
 [ext_resource type="Theme" uid="uid://6vtboj1uvhuh" path="res://Assets/theme.tres" id="9_p8r40"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w3ugs"]
@@ -61,9 +63,12 @@ script = ExtResource("3_umwci")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource("RectangleShape2D_w3ugs")
 
-[node name="Weapons" type="Node2D" parent="."]
+[node name="Weapons" type="Node2D" parent="." groups=["Weapon"]]
 
 [node name="Beretta 92" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("7_ogoph")]
+trackedNode = NodePath("../../cursor_location")
+
+[node name="MP5" parent="Weapons" node_paths=PackedStringArray("trackedNode") instance=ExtResource("5_k6vjo")]
 trackedNode = NodePath("../../cursor_location")
 
 [node name="cursor_location" type="Node2D" parent="."]
@@ -128,6 +133,9 @@ value = 100.0
 rounded = true
 fill_mode = 3
 show_percentage = false
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_2khpg")
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

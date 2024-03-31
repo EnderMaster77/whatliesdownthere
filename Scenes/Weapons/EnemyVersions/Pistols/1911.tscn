@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://sdik2bpaqlyv"]
+[gd_scene load_steps=8 format=3 uid="uid://sdik2bpaqlyv"]
 
 [ext_resource type="BulletType" uid="uid://r3m4lj16gs6h" path="res://Scenes/Weapons/EnemyVersions/ARs/ebullet.tres" id="1_7op7g"]
 [ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="2_45g5d"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_pmgjs"]
 [ext_resource type="Texture2D" uid="uid://bx7ng74s8pdxj" path="res://Assets/Guns/1911.png" id="3_xiw08"]
 [ext_resource type="PackedScene" uid="uid://cyxldbwmxsxpd" path="res://Scenes/Pickups/ammo-pistol.tscn" id="5_7pdg2"]
+[ext_resource type="PackedScene" uid="uid://dnvfbx028jddk" path="res://Scenes/Weapons/Pistols/1911.tscn" id="5_jkpxs"]
+[ext_resource type="AudioStream" uid="uid://bj34lxktv5iut" path="res://Assets/SFX/pistol.wav" id="7_ocgsi"]
 
 [node name="Weapon" type="Spawner"]
 startMode = 2
@@ -14,6 +16,7 @@ staysTowardPlayer = true
 texture = ExtResource("2_45g5d")
 script = ExtResource("2_pmgjs")
 gun_texture = ExtResource("3_xiw08")
+player_version = ExtResource("5_jkpxs")
 weapon_name = "1911"
 weapon_ammo_pack = ExtResource("5_7pdg2")
 random_spread = 10.0
@@ -28,6 +31,10 @@ wait_time = 0.32
 [node name="ReloadTimer" type="Timer" parent="."]
 wait_time = 0.75
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ocgsi")
+max_distance = 4000.0
 
 [connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

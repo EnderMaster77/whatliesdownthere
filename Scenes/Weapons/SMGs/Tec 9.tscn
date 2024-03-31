@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://qd2a6ttggw2t"]
+[gd_scene load_steps=7 format=3 uid="uid://qd2a6ttggw2t"]
 
 [ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_1w4fb"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_0mbdx"]
 [ext_resource type="Texture2D" uid="uid://djfwh24vt14fn" path="res://Assets/tec 9.png" id="3_04kbv"]
+[ext_resource type="AudioStream" uid="uid://b65v5ukcsrrka" path="res://Assets/SFX/Tec9.wav" id="4_mivte"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
 
@@ -33,6 +34,9 @@ wait_time = 0.08
 
 [node name="ReloadTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_mivte")
 
 [connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ba2nqn1qgppvl"]
+[gd_scene load_steps=7 format=3 uid="uid://ba2nqn1qgppvl"]
 
 [ext_resource type="BulletType" uid="uid://r3m4lj16gs6h" path="res://Scenes/Weapons/EnemyVersions/ARs/ebullet.tres" id="1_r2cuw"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_1bf53"]
 [ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="2_pbas2"]
 [ext_resource type="Texture2D" uid="uid://ci4fruv4epk6w" path="res://Assets/aa12.png" id="3_nogyd"]
 [ext_resource type="PackedScene" uid="uid://b2a57bmdpvmf3" path="res://Scenes/Pickups/ammo-shotgun.tscn" id="5_h3koe"]
+[ext_resource type="PackedScene" uid="uid://cbvgewg8najg1" path="res://Scenes/Weapons/Shotguns/AA12.tscn" id="5_ng7gj"]
 
 [node name="Weapon" type="Spawner"]
 startMode = 2
@@ -17,6 +18,7 @@ offsetTowardPlayer = -45.0
 texture = ExtResource("2_pbas2")
 script = ExtResource("2_1bf53")
 gun_texture = ExtResource("3_nogyd")
+player_version = ExtResource("5_ng7gj")
 weapon_name = "AA12"
 weapon_ammo_pack = ExtResource("5_h3koe")
 player_weapon = true

@@ -4,6 +4,8 @@ class_name Weapon
 @export var gun_texture: Texture2D
 @export var gun_side_profile: Texture2D
 
+@export var player_version: PackedScene
+
 
 @export var weapon_name: String ## Name Of the Weapon.
 
@@ -40,18 +42,17 @@ func reload():
 		$ReloadTimer.start()
 		reloading = true
 func throw():
-	if broken == true:
-		throwing = true
-		#texture # Set custom texture.
-		bulletsPerRadius =1
-		bulletType.scale =10
-		damage = 200 
-		clear_all()
-		set_manual_start(true)
+	throwing = true
+	#texture # Set custom texture.
+	bulletsPerRadius =1
+	bulletType.scale =10
+	damage = 200 
+	clear_all()
+	set_manual_start(true)
 func fire():
 	if selected == true or player_weapon == false:
 		if can_fire == true && reloading == false:
-			if (broken == false && bullets_in_mag > 0) or player_weapon == false:
+			if (throwing == false && broken == false && bullets_in_mag > 0) or player_weapon == false:
 				if random_spread != 0:
 					offsetTowardPlayer = 0
 					offsetTowardPlayer = RandomNumberGenerator.new().randi_range(-random_spread,random_spread)
@@ -59,6 +60,7 @@ func fire():
 				can_fire = false
 				$Timer.start()
 				bullets_in_mag -= 1
+				$AudioStreamPlayer2D.play()
 				if durability > 0:
 					durability -= 1
 					if durability <=0:

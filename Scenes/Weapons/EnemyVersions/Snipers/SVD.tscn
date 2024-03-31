@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpnmkc7bpg8gj"]
+[gd_scene load_steps=7 format=3 uid="uid://cpnmkc7bpg8gj"]
 
 [ext_resource type="Texture2D" uid="uid://dy12h5hpgvayw" path="res://Assets/pro bullet.png" id="1_0wgne"]
 [ext_resource type="BulletType" uid="uid://cjvprmkx2gv1j" path="res://Scenes/Weapons/EnemyVersions/Snipers/sniper.tres" id="1_ry4qc"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_6dfws"]
 [ext_resource type="Texture2D" uid="uid://cabs30dn2c4a1" path="res://Assets/svd.png" id="3_nshf4"]
+[ext_resource type="PackedScene" uid="uid://d2tuntuqbkt3n" path="res://Scenes/Weapons/Snipers/SVD.tscn" id="5_kr8ch"]
+[ext_resource type="PackedScene" uid="uid://bhqugwlovbcri" path="res://Scenes/Pickups/ammo-snipers.tscn" id="5_ngmm5"]
 
 [node name="Weapon" type="Spawner"]
 startMode = 2
@@ -13,7 +15,9 @@ staysTowardPlayer = true
 texture = ExtResource("1_0wgne")
 script = ExtResource("2_6dfws")
 gun_texture = ExtResource("3_nshf4")
+player_version = ExtResource("5_kr8ch")
 weapon_name = "SVD"
+weapon_ammo_pack = ExtResource("5_ngmm5")
 random_spread = 5.0
 player_weapon = true
 damage = 45.0
@@ -22,7 +26,7 @@ durability = 50.0
 ammo_type = "Sniper"
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.4
 
 [node name="ReloadTimer" type="Timer" parent="."]
 wait_time = 1.25

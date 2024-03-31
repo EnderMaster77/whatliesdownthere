@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdy7yvydy6qod"]
+[gd_scene load_steps=7 format=3 uid="uid://cdy7yvydy6qod"]
 
 [ext_resource type="Texture2D" uid="uid://dy12h5hpgvayw" path="res://Assets/pro bullet.png" id="1_mtjup"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_rgdrq"]
 [ext_resource type="Texture2D" uid="uid://dnah5qpcr4ngr" path="res://Assets/sawn off.png" id="3_xcx1y"]
+[ext_resource type="AudioStream" uid="uid://d2tnsklrbxnii" path="res://Assets/SFX/db.wav" id="4_3d8wj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
 
@@ -36,6 +37,9 @@ wait_time = 0.01
 [node name="ReloadTimer" type="Timer" parent="."]
 wait_time = 1.75
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_3d8wj")
 
 [connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

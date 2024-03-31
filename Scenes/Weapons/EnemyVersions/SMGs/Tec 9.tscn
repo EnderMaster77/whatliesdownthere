@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5wnpdwv1s61j"]
+[gd_scene load_steps=8 format=3 uid="uid://b5wnpdwv1s61j"]
 
 [ext_resource type="BulletType" uid="uid://r3m4lj16gs6h" path="res://Scenes/Weapons/EnemyVersions/ARs/ebullet.tres" id="1_aklxe"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_pe802"]
 [ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="2_rul5p"]
 [ext_resource type="Texture2D" uid="uid://djfwh24vt14fn" path="res://Assets/tec 9.png" id="3_ljxm2"]
+[ext_resource type="PackedScene" uid="uid://qd2a6ttggw2t" path="res://Scenes/Weapons/SMGs/Tec 9.tscn" id="5_aj8aj"]
+[ext_resource type="PackedScene" uid="uid://cyxldbwmxsxpd" path="res://Scenes/Pickups/ammo-pistol.tscn" id="5_oaqh3"]
+[ext_resource type="AudioStream" uid="uid://b65v5ukcsrrka" path="res://Assets/SFX/Tec9.wav" id="7_avmji"]
 
 [node name="Weapon" type="Spawner"]
 startMode = 2
@@ -13,7 +16,9 @@ staysTowardPlayer = true
 texture = ExtResource("2_rul5p")
 script = ExtResource("2_pe802")
 gun_texture = ExtResource("3_ljxm2")
+player_version = ExtResource("5_aj8aj")
 weapon_name = "Tec9"
+weapon_ammo_pack = ExtResource("5_oaqh3")
 random_spread = 10.0
 player_weapon = true
 damage = 8.0
@@ -25,6 +30,10 @@ wait_time = 0.08
 
 [node name="ReloadTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_avmji")
+max_distance = 4000.0
 
 [connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

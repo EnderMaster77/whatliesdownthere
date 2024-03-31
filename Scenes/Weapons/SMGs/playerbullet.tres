@@ -1,0 +1,9 @@
+[gd_resource type="BulletType" load_steps=2 format=3 uid="uid://bkgv65xgch08h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
+
+[resource]
+initialSpeed = 650.0
+_shape = SubResource("CircleShape2D_5vocg")
+mask = 5
+collideWithBodies = true

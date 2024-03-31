@@ -4,7 +4,7 @@ const SPEED: float = 500
 
 @export var player: Node2D
 var healthpackfab = preload("res://Scenes/Pickups/healthpack.tscn")
-var ammofab := preload("res://Scenes/Pickups/ammo-pistol.tscn")
+var weapondrop := preload("res://Scenes/Pickups/dropped-weapon.tscn")
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var LOS_check := $"LOS check" as RayCast2D
 var on_screen: bool = false
@@ -24,7 +24,14 @@ func damage(damage: float):
 		if r >= .30:
 			var randnum: float = randf()
 			if randnum > .80:
-				print("Drop Weapon")
+				print("WEAPON DROPPED!")
+				var pack = weapondrop.instantiate()
+				pack.global_position = global_position
+				pack.weapon_dropped = $Weapon.player_version
+				print($Weapon.player_version)
+				get_parent().add_sibling(pack)
+				
+				
 			elif randnum > 0.40:
 				var pack = healthpackfab.instantiate()
 				pack.global_position = global_position
@@ -32,7 +39,7 @@ func damage(damage: float):
 				pack.scale = scale
 				pack.global_position = global_position
 			else:
-				var pack = ammofab.instantiate()
+				var pack = $Weapon.weapon_ammo_pack.instantiate()
 				pack.global_position = global_position
 				add_sibling(pack)
 				pack.scale = scale

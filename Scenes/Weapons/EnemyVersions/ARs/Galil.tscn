@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cu5cd008gx2jw"]
+[gd_scene load_steps=8 format=3 uid="uid://cu5cd008gx2jw"]
 
 [ext_resource type="BulletType" uid="uid://r3m4lj16gs6h" path="res://Scenes/Weapons/EnemyVersions/ARs/ebullet.tres" id="1_8l5cw"]
 [ext_resource type="Texture2D" uid="uid://ct4p4e0lfyxdx" path="res://Assets/Art/ourbullet.png" id="2_2urac"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_axeo2"]
 [ext_resource type="Texture2D" uid="uid://g7cmiaiif2j" path="res://Assets/galil.png" id="3_6tjio"]
 [ext_resource type="PackedScene" uid="uid://baw2r7ax60xdq" path="res://Scenes/Pickups/ammo-AR.tscn" id="5_j7j7y"]
+[ext_resource type="PackedScene" uid="uid://5r0rsulu8p0" path="res://Scenes/Weapons/ARs/Galil.tscn" id="5_kxdyb"]
+[ext_resource type="AudioStream" uid="uid://beoc7wkdsw1q0" path="res://Assets/SFX/galil.wav" id="7_fmv4d"]
 
 [node name="Weapon" type="Spawner"]
 startMode = 2
@@ -14,6 +16,7 @@ staysTowardPlayer = true
 texture = ExtResource("2_2urac")
 script = ExtResource("2_axeo2")
 gun_texture = ExtResource("3_6tjio")
+player_version = ExtResource("5_kxdyb")
 weapon_name = "Galil"
 weapon_ammo_pack = ExtResource("5_j7j7y")
 player_weapon = true
@@ -25,6 +28,9 @@ wait_time = 0.15
 [node name="ReloadTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_fmv4d")
 
 [connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

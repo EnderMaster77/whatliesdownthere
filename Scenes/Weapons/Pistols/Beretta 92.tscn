@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bne8rdptvf6cb"]
+[gd_scene load_steps=7 format=3 uid="uid://bne8rdptvf6cb"]
 
 [ext_resource type="Texture2D" uid="uid://dy12h5hpgvayw" path="res://Assets/pro bullet.png" id="1_fs5e4"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_8pm12"]
 [ext_resource type="Texture2D" uid="uid://bg45fsr7mt4fl" path="res://Assets/Guns/beretta.png" id="3_05of4"]
+[ext_resource type="AudioStream" uid="uid://bj34lxktv5iut" path="res://Assets/SFX/pistol.wav" id="4_mq03r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
 
@@ -34,6 +35,9 @@ wait_time = 0.3
 [node name="ReloadTimer" type="Timer" parent="."]
 wait_time = 0.75
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_mq03r")
 
 [connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

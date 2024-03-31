@@ -1,25 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://cc0fl588uxjrg"]
+[gd_scene load_steps=7 format=3 uid="uid://cc0fl588uxjrg"]
 
 [ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_12qu2"]
+[ext_resource type="BulletType" uid="uid://bkgv65xgch08h" path="res://Scenes/Weapons/SMGs/playerbullet.tres" id="1_y360j"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_ujk6u"]
 [ext_resource type="Texture2D" uid="uid://dv783oc4ax85c" path="res://Assets/mp5.png" id="3_8rhqj"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_5vocg"]
-
-[sub_resource type="BulletType" id="BulletType_16r2w"]
-initialSpeed = 650.0
-_shape = SubResource("CircleShape2D_5vocg")
-mask = 5
-collideWithBodies = true
+[ext_resource type="PackedScene" uid="uid://bwlt5g1rbsmeq" path="res://Scenes/Weapons/EnemyVersions/SMGs/MP5.tscn" id="5_fpuvo"]
+[ext_resource type="AudioStream" uid="uid://biqqg46651n" path="res://Assets/SFX/mp5.wav" id="6_vjdcy"]
 
 [node name="MP5" type="Spawner"]
 startMode = 2
-bulletType = SubResource("BulletType_16r2w")
+bulletType = ExtResource("1_y360j")
 startTowardPlayer = true
 staysTowardPlayer = true
 texture = ExtResource("1_12qu2")
 script = ExtResource("2_ujk6u")
 gun_texture = ExtResource("3_8rhqj")
+player_version = ExtResource("5_fpuvo")
 weapon_name = "MP5"
 random_spread = 22.5
 player_weapon = true
@@ -33,6 +29,9 @@ wait_time = 0.105
 
 [node name="ReloadTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_vjdcy")
 
 [connection signal="bullet_hit" from="." to="." method="_on_bullet_hit"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

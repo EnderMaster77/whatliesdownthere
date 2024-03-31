@@ -12,10 +12,10 @@ signal finished
 
 @export var start: bool = false : set = set_start
 func set_start(val:bool)-> void:
-	generate(Vector2i(1,1),Vector2i(1,1),enemy_weapons[0],enemy_weapons[1])
+	generate(Vector2i(0,0),Vector2i(0,0),enemy_weapons[0],enemy_weapons[1])
 	$Bordertimer.start()
 
-@export var make_border: bool = false : set = generate_border
+#@export var make_border: bool = false : set = generate_border
 
 
 
@@ -40,6 +40,9 @@ func set_border_size(val: int) -> void:
 @export var min_enemies_per_room: int = 1
 @export var max_enemies_per_room: int = 4
 
+var floortile
+var walltile
+
 var room_tiles: Array[PackedVector2Array] = []
 var room_positions: PackedVector2Array = []
 	 
@@ -50,34 +53,37 @@ func visualize_border():
 		tilemap.set_cell(0,Vector2i(i,-1), 0, Vector2i(1,1))
 		tilemap.set_cell(0,Vector2i(border_size,i), 0, Vector2i(1,1))
 		tilemap.set_cell(0,Vector2i(-1,i), 0, Vector2i(1,1))
-func generate_border(val: bool):
+func generate_border(val: bool, wall_tile: Vector2i):
 	var past_cells = tilemap.get_used_cells(0)
 	for i in past_cells:
 		var neighbor = Vector2i(i.x, i.y-1)
 		if tilemap.get_cell_tile_data(0,neighbor) == null:
-			tilemap.set_cell(0,neighbor,0,Vector2i(1,1))
+			tilemap.set_cell(0,neighbor,0,wall_tile)
 		neighbor = Vector2i(i.x+1, i.y-1)
 		if tilemap.get_cell_tile_data(0,neighbor) == null:
-			tilemap.set_cell(0,neighbor,0,Vector2i(1,1))
+			tilemap.set_cell(0,neighbor,0,wall_tile)
 		neighbor = Vector2i(i.x+1, i.y)
 		if tilemap.get_cell_tile_data(0,neighbor) == null:
-			tilemap.set_cell(0,neighbor,0,Vector2i(1,1))
+			tilemap.set_cell(0,neighbor,0,wall_tile)
 		neighbor = Vector2i(i.x+1, i.y+1)
 		if tilemap.get_cell_tile_data(0,neighbor) == null:
-			tilemap.set_cell(0,neighbor,0,Vector2i(1,1))
+			tilemap.set_cell(0,neighbor,0,wall_tile)
 		neighbor = Vector2i(i.x, i.y+1)
 		if tilemap.get_cell_tile_data(0,neighbor) == null:
-			tilemap.set_cell(0,neighbor,0,Vector2i(1,1))
+			tilemap.set_cell(0,neighbor,0,wall_tile)
 		neighbor = Vector2i(i.x-1, i.y+1)
 		if tilemap.get_cell_tile_data(0,neighbor) == null:
-			tilemap.set_cell(0,neighbor,0,Vector2i(1,1))
+			tilemap.set_cell(0,neighbor,0,wall_tile)
 		neighbor = Vector2i(i.x-1, i.y)
 		if tilemap.get_cell_tile_data(0,neighbor) == null:
-			tilemap.set_cell(0,neighbor,0,Vector2i(1,1))
+			tilemap.set_cell(0,neighbor,0,wall_tile)
 		neighbor = Vector2i(i.x-1, i.y-1)
 		if tilemap.get_cell_tile_data(0,neighbor) == null:
-			tilemap.set_cell(0,neighbor,0,Vector2i(1,1))
+			tilemap.set_cell(0,neighbor,0,wall_tile)
 func generate(floor_tile: Vector2i, wall_tile: Vector2i,gun1:PackedScene,gun2:PackedScene):
+	walltile = wall_tile
+	floortile = floor_tile
+	print(floortile)
 	room_tiles.clear()
 	room_positions.clear()
 	for child in tilemap.get_children():
@@ -135,9 +141,9 @@ func generate(floor_tile: Vector2i, wall_tile: Vector2i,gun1:PackedScene,gun2:Pa
 				if survival_chance > kill :
 					hallway_graph.connect_points(p,c)
 					
-	create_hallways(hallway_graph)
+	create_hallways(hallway_graph, floor_tile)
 	
-func create_hallways(hallway_graph:AStar2D):
+func create_hallways(hallway_graph:AStar2D, floor_tile):
 	var hallways : Array[PackedVector2Array] = []
 	for p in hallway_graph.get_point_ids():
 		for c in hallway_graph.get_point_connections(p):
@@ -156,8 +162,8 @@ func create_hallways(hallway_graph:AStar2D):
 						tile_to = t
 				var hallway : PackedVector2Array = [tile_from,tile_to]
 				hallways.append(hallway)
-				tilemap.set_cell(0,tile_from, 0, Vector2i(3,2))
-				tilemap.set_cell(0,tile_to, 0, Vector2i(3,2))
+				tilemap.set_cell(0,tile_from, 0, floor_tile)
+				tilemap.set_cell(0,tile_to, 0, floor_tile)
 	
 	var astar : AStarGrid2D = AStarGrid2D.new()
 	astar.region= Rect2i(0,0,Vector2i.ONE.x * border_size, Vector2i.ONE.y * border_size)
@@ -177,19 +183,19 @@ func create_hallways(hallway_graph:AStar2D):
 		var time: int = 0
 		for t in hall:
 			if tilemap.get_cell_tile_data(0,t) == null:
-				tilemap.set_cell(0,t, 0, Vector2i(3,2))
+				tilemap.set_cell(0,t, 0,floor_tile)
 			var neighbor = Vector2i(t.x, t.y-1)
 			if tilemap.get_cell_tile_data(0,neighbor) == null:
-				tilemap.set_cell(0,neighbor,0,Vector2i(3,2))
+				tilemap.set_cell(0,neighbor,0,floor_tile)
 			neighbor = Vector2i(t.x+1, t.y)
 			if tilemap.get_cell_tile_data(0,neighbor) == null:
-				tilemap.set_cell(0,neighbor,0,Vector2i(3,2))
+				tilemap.set_cell(0,neighbor,0,floor_tile)
 			neighbor = Vector2i(t.x, t.y+1)
 			if tilemap.get_cell_tile_data(0,neighbor) == null:
-				tilemap.set_cell(0,neighbor,0,Vector2i(3,2))
+				tilemap.set_cell(0,neighbor,0,floor_tile)
 			neighbor = Vector2i(t.x-1, t.y)
 			if tilemap.get_cell_tile_data(0,neighbor) == null:
-				tilemap.set_cell(0,neighbor,0,Vector2i(3,2))
+				tilemap.set_cell(0,neighbor,0,floor_tile)
 		time += 1
 		if _t%16 == 15: await  get_tree().create_timer(0).timeout
 
@@ -215,7 +221,7 @@ func make_room(rec:int,room_num:int, gun1,gun2):
 	for r in height:
 		for c in width:
 			var pos : Vector2i = start_pos + Vector2i(c,r)
-			tilemap.set_cell(0,pos, 0, Vector2i(3,2))
+			tilemap.set_cell(0,pos, 0, floortile)
 			room.append(pos)
 	room_tiles.append(room)
 	var avg_x : float = start_pos.x + (float(width)/2)
@@ -235,6 +241,7 @@ func make_room(rec:int,room_num:int, gun1,gun2):
 func spawn_enemy(location: Vector2i, gun1, gun2):
 	var enemy = enemyfab.instantiate()
 	var weapon
+	print(gun1," ",gun2)
 	if randf() > .50:
 		weapon = gun1.instantiate()
 	else:
@@ -250,7 +257,7 @@ func spawn_enemy(location: Vector2i, gun1, gun2):
 
 
 func _on_bordertimer_timeout() -> void:
-	generate_border(true)
+	generate_border(true, walltile)
 	var pointa: Vector2i = Vector2i.ZERO
 	var pointb: Vector2i = Vector2i.ZERO
 	var distance: float = 0
@@ -270,7 +277,19 @@ func _on_bordertimer_timeout() -> void:
 	if Engine.is_editor_hint() == false:
 		#$TpPad.global_position = bosspoint.global_position
 		$TPTOLEVEL.target_location = spawnpoint.global_position
+		$TPTOLEVEL2.target_location = spawnpoint.global_position
+		$TPTOLEVEL3.target_location = spawnpoint.global_position
+		$TPTOLEVEL4.target_location = spawnpoint.global_position
+		$TPTOLEVEL5.target_location = spawnpoint.global_position
+		$TPTOLEVEL6.target_location = spawnpoint.global_position
+		$TPTOLEVEL2.show()
+		$TPTOLEVEL3.show()
+		$TPTOLEVEL4.show()
+		$TPTOLEVEL5.show()
+		$TPTOLEVEL5.show()
+		$TPTOLEVEL6.show()
 		$TPTOLEVEL.show()
+		
 		finished.emit()
 	for child in $TileMap.get_children():
 		if child.is_in_group("Enemy"):
