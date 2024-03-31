@@ -274,6 +274,7 @@ func _on_bordertimer_timeout() -> void:
 	spawnpoint.position = tilemap.map_to_local(pointa)
 	tilemap.add_child(spawnpoint)
 	tilemap.add_child(bosspoint)
+	$PORTALBACK.global_position = bosspoint.global_position
 	if Engine.is_editor_hint() == false:
 		#$TpPad.global_position = bosspoint.global_position
 		$TPTOLEVEL.target_location = spawnpoint.global_position

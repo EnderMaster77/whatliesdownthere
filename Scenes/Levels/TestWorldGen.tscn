@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://btqluc7vvectn"]
+[gd_scene load_steps=44 format=3 uid="uid://c5lkkvcrpuidy"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/TestWorldGen.gd" id="1_4o8nm"]
 [ext_resource type="Texture2D" uid="uid://cjw6jmqvwj7r2" path="res://Assets/Art/tileset.png" id="1_a1130"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bp5bx24lhr0wd" path="res://Scenes/Characters/Player/character.tscn" id="4_fksjc"]
 [ext_resource type="PackedScene" uid="uid://b3tx4xctyit0p" path="res://Scenes/Extras/TPPad.tscn" id="6_ibn47"]
 [ext_resource type="PackedScene" uid="uid://sdik2bpaqlyv" path="res://Scenes/Weapons/EnemyVersions/Pistols/1911.tscn" id="7_04km4"]
+[ext_resource type="Texture2D" uid="uid://cufd3gtbp8dyf" path="res://Assets/portal.png" id="7_gyvob"]
+[ext_resource type="Script" path="res://Scenes/Levels/PORTALBACK.gd" id="7_j36uc"]
 [ext_resource type="Script" path="res://addons/PerfBullets/GDScript_Classes/PatternManager.gd" id="7_xpkce"]
 [ext_resource type="PackedScene" uid="uid://dmqsknfe86sff" path="res://Scenes/Weapons/EnemyVersions/Pistols/Beretta 92.tscn" id="8_d35bj"]
 [ext_resource type="Theme" uid="uid://6vtboj1uvhuh" path="res://Assets/theme.tres" id="8_g700h"]
@@ -707,6 +709,9 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_uegdc")
 sources/1 = SubResource("TileSetAtlasSource_uh5xq")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_bvj60"]
+radius = 100.009
+
 [node name="TestWorldGen" type="Node2D"]
 script = ExtResource("1_4o8nm")
 enemy_weapons = [ExtResource("2_h5wxg"), null]
@@ -740,6 +745,22 @@ layer_0/tile_data = PackedInt32Array(-3538939, 327681, 3, -3473403, 196609, 2, -
 
 [node name="Character" parent="." instance=ExtResource("4_fksjc")]
 position = Vector2(3680, -8000)
+
+[node name="PORTALBACK" type="Area2D" parent="."]
+scale = Vector2(3, 3)
+collision_layer = 0
+collision_mask = 128
+script = ExtResource("7_j36uc")
+target_location = Vector2(3680, -8000)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PORTALBACK"]
+shape = SubResource("CircleShape2D_bvj60")
+
+[node name="Sprite2D" type="Sprite2D" parent="PORTALBACK"]
+texture_filter = 1
+scale = Vector2(5, 5)
+texture = ExtResource("7_gyvob")
 
 [node name="TPTOLEVEL" parent="." instance=ExtResource("6_ibn47")]
 z_index = -2
@@ -781,6 +802,7 @@ weapon1 = ExtResource("14_0tdnk")
 weapon2 = ExtResource("15_7vo0h")
 
 [node name="TPTOLEVEL6" parent="." instance=ExtResource("6_ibn47")]
+visible = false
 modulate = Color(1, 0, 1, 1)
 z_index = -2
 position = Vector2(2500, -8000)
@@ -882,6 +904,10 @@ vertical_alignment = 1
 [connection signal="finished" from="." to="TPTOLEVEL5" method="_on_world_gen_finished"]
 [connection signal="finished" from="." to="TPTOLEVEL6" method="_on_world_gen_finished"]
 [connection signal="timeout" from="Bordertimer" to="." method="_on_bordertimer_timeout"]
+[connection signal="area_entered" from="PORTALBACK" to="PORTALBACK" method="_on_area_entered"]
+[connection signal="area_exited" from="PORTALBACK" to="PORTALBACK" method="_on_area_exited"]
+[connection signal="body_entered" from="PORTALBACK" to="PORTALBACK" method="_on_area_entered"]
+[connection signal="body_exited" from="PORTALBACK" to="PORTALBACK" method="_on_area_exited"]
 [connection signal="finished" from="TPTOLEVEL" to="." method="_on_tptolevel_finished"]
 [connection signal="finished" from="TPTOLEVEL" to="Character" method="_on_tptolevel_finished"]
 [connection signal="start" from="TPTOLEVEL" to="Character" method="_on_tptolevel_start"]
