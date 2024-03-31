@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Godot PerfBullets
 ![PerfBulletsLogo - Copy](https://github.com/Moonzel/Godot-PerfBullets/assets/96361809/e3c2392a-09f8-4cf9-b98b-f213b233ae62)
 
@@ -297,3 +298,7 @@ In the repository, there is a folder named `examples` that holds a few examples 
 
 ## Support
 Please star this repository and share it with other developers who would also benefit from this plugin!
+=======
+# whatliesdownthere
+What lies down there is a game jam game made for the Collegiate Game Jam 2024. This game was made in a week!
+>>>>>>> a29ad5a04c876a76f92bf955de9b965f2ad2f8bc
