@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://jxwjvcp6lvue"]
+[gd_scene load_steps=5 format=3 uid="uid://jxwjvcp6lvue"]
 
 [ext_resource type="Theme" uid="uid://6vtboj1uvhuh" path="res://Assets/theme.tres" id="1_3ey47"]
 [ext_resource type="Script" path="res://Scenes/Menus/MainMenu.gd" id="1_xdsx4"]
+[ext_resource type="Shader" path="res://Scenes/Levels/vhs.gdshader" id="3_cftwo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l8jix"]
+shader = ExtResource("3_cftwo")
+shader_parameter/wiggle = 0.03
+shader_parameter/wiggle_speed = 25.0
+shader_parameter/smear = 0.3
+shader_parameter/blur_samples = 5
 
 [node name="MainMenu" type="Control"]
 texture_filter = 1
@@ -12,6 +20,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xdsx4")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+material = SubResource("ShaderMaterial_l8jix")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
@@ -98,3 +117,4 @@ text = "Back"
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Credits2" to="." method="_on_credits_2_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Credits/Back" to="." method="_on_back_pressed"]

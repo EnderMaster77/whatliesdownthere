@@ -82,6 +82,13 @@ func _process(delta: float) -> void:
 		selectedweapon.throw()
 		$gun_sprite.texture = null
 		selectedweapon = null
+	if selectedweapon != null && selectedweapon.reloading == true:
+		$gun_sprite/ColorRect.show()#"shader_parameter/value"
+		$gun_sprite/ColorRect.material.set_shader_parameter("value", \
+		selectedweapon.get_child(1).time_left/selectedweapon.get_child(1).wait_time) #selectedweapon.get_child(1).time_left/selectedweapon.get_child(1).wait_time
+	else:
+		$gun_sprite/ColorRect.hide()
+
 	$cursor_location.global_position = get_global_mouse_position()
 	if selectedweapon != null:
 		$CanvasLayer/Gui/Control/Label.text = str(selectedweapon.name)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://bp5bx24lhr0wd"]
+[gd_scene load_steps=18 format=3 uid="uid://bp5bx24lhr0wd"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player/movement.gd" id="1_8a5wn"]
 [ext_resource type="Shader" path="res://Scenes/Levels/vhs.gdshader" id="1_8y3ve"]
 [ext_resource type="Texture2D" uid="uid://nauiwoxx1oun" path="res://Assets/Characters/player.png" id="2_adshr"]
+[ext_resource type="Shader" path="res://Scenes/Characters/Player/radius.gdshader" id="2_fki2c"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/hitbox.gd" id="3_umwci"]
 [ext_resource type="PackedScene" uid="uid://cc0fl588uxjrg" path="res://Scenes/Weapons/SMGs/MP5.tscn" id="5_k6vjo"]
 [ext_resource type="PackedScene" uid="uid://bne8rdptvf6cb" path="res://Scenes/Weapons/Pistols/Beretta 92.tscn" id="7_ogoph"]
@@ -22,6 +23,17 @@ gradient = SubResource("Gradient_sib7k")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.824786, 0.136752)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5mfrb"]
+shader = ExtResource("2_fki2c")
+shader_parameter/primary_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/unfilled_color = Color(1, 0, 1, 1)
+shader_parameter/value = 1.0
+shader_parameter/smooth_ = 0.005
+shader_parameter/width_in = 0.85
+shader_parameter/width_out = 0.95
+shader_parameter/border_width = 0.03
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qk4d4"]
 bg_color = Color(1, 1, 1, 1)
@@ -126,6 +138,14 @@ one_shot = true
 [node name="gun_sprite" type="Sprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(5, 5)
+
+[node name="ColorRect" type="ColorRect" parent="gun_sprite"]
+material = SubResource("ShaderMaterial_5mfrb")
+offset_left = 14.4
+offset_top = -14.4
+offset_right = 158.4
+offset_bottom = 129.6
+scale = Vector2(0.2, 0.2)
 
 [node name="Health" type="ProgressBar" parent="."]
 z_index = 101
