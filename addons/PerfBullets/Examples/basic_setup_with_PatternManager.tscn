@@ -6,10 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://duq34uom7vsr6" path="res://addons/PerfBullets/Examples/player.tscn" id="4_in8cm"]
 [ext_resource type="Script" path="res://addons/PerfBullets/GDScript_Classes/PatternSpawnerData.gd" id="4_ridx3"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o6m1g"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l53b6"]
 
 [sub_resource type="BulletType" id="BulletType_wcrsq"]
-_shape = SubResource("CapsuleShape2D_o6m1g")
+_shape = SubResource("CapsuleShape2D_l53b6")
 
 [sub_resource type="Resource" id="Resource_i0xbe"]
 script = ExtResource("4_ridx3")
@@ -37,7 +37,7 @@ position = Vector2(604, 227)
 
 [node name="PatternManager" type="Node" parent="."]
 script = ExtResource("3_j2p7r")
-data = Array[ExtResource("4_ridx3")]([SubResource("Resource_i0xbe")])
+data = Array[ExtResource("4_ridx3")]([SubResource("Resource_i0xbe"), null])
 
 [node name="Player" parent="." instance=ExtResource("4_in8cm")]
 position = Vector2(94, 105)
