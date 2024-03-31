@@ -88,8 +88,11 @@ func _on_reload_timer_timeout() -> void:
 	var added_bullets = mag_size - bullets_in_mag
 	reloading = false
 	if get_parent().get_parent().ammo[ammo_type] - added_bullets <= 0:
-		bullets_in_mag = get_parent().get_parent().ammo[ammo_type]
+		bullets_in_mag += get_parent().get_parent().ammo[ammo_type]
 		get_parent().get_parent().ammo[ammo_type] = 0
 	else:
 		get_parent().get_parent().ammo[ammo_type] -= added_bullets
 		bullets_in_mag += added_bullets
+	if bullets_in_mag >= mag_size:
+		bullets_in_mag = mag_size
+	

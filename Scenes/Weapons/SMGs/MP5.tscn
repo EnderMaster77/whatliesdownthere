@@ -1,21 +1,22 @@
 [gd_scene load_steps=7 format=3 uid="uid://cc0fl588uxjrg"]
 
-[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_12qu2"]
 [ext_resource type="BulletType" uid="uid://bkgv65xgch08h" path="res://Scenes/Weapons/SMGs/playerbullet.tres" id="1_y360j"]
+[ext_resource type="Texture2D" uid="uid://dy12h5hpgvayw" path="res://Assets/pro bullet.png" id="2_2ucpy"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_ujk6u"]
 [ext_resource type="Texture2D" uid="uid://dv783oc4ax85c" path="res://Assets/mp5.png" id="3_8rhqj"]
-[ext_resource type="PackedScene" uid="uid://bwlt5g1rbsmeq" path="res://Scenes/Weapons/EnemyVersions/SMGs/MP5.tscn" id="5_fpuvo"]
 [ext_resource type="AudioStream" uid="uid://biqqg46651n" path="res://Assets/SFX/mp5.wav" id="6_vjdcy"]
+
+[sub_resource type="PackedScene" id="PackedScene_faour"]
 
 [node name="MP5" type="Spawner"]
 startMode = 2
 bulletType = ExtResource("1_y360j")
 startTowardPlayer = true
 staysTowardPlayer = true
-texture = ExtResource("1_12qu2")
+texture = ExtResource("2_2ucpy")
 script = ExtResource("2_ujk6u")
 gun_texture = ExtResource("3_8rhqj")
-player_version = ExtResource("5_fpuvo")
+player_version = SubResource("PackedScene_faour")
 weapon_name = "MP5"
 random_spread = 22.5
 player_weapon = true

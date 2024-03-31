@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://qd2a6ttggw2t"]
 
-[ext_resource type="Texture2D" uid="uid://cky5dgqsu32sm" path="res://icon.svg" id="1_1w4fb"]
+[ext_resource type="Texture2D" uid="uid://dy12h5hpgvayw" path="res://Assets/pro bullet.png" id="1_leo63"]
 [ext_resource type="Script" path="res://Scenes/Weapons/weapon.gd" id="2_0mbdx"]
 [ext_resource type="Texture2D" uid="uid://djfwh24vt14fn" path="res://Assets/tec 9.png" id="3_04kbv"]
 [ext_resource type="AudioStream" uid="uid://b65v5ukcsrrka" path="res://Assets/SFX/Tec9.wav" id="4_mivte"]
@@ -19,7 +19,7 @@ startMode = 2
 bulletType = SubResource("BulletType_16r2w")
 startTowardPlayer = true
 staysTowardPlayer = true
-texture = ExtResource("1_1w4fb")
+texture = ExtResource("1_leo63")
 script = ExtResource("2_0mbdx")
 gun_texture = ExtResource("3_04kbv")
 weapon_name = "Tec9"
