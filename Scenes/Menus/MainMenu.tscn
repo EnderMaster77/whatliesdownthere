@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://jxwjvcp6lvue"]
+[gd_scene load_steps=6 format=3 uid="uid://jxwjvcp6lvue"]
 
 [ext_resource type="Theme" uid="uid://6vtboj1uvhuh" path="res://Assets/theme.tres" id="1_3ey47"]
 [ext_resource type="Script" path="res://Scenes/Menus/MainMenu.gd" id="1_xdsx4"]
 [ext_resource type="Shader" path="res://Scenes/Levels/vhs.gdshader" id="3_cftwo"]
+[ext_resource type="AudioStream" uid="uid://dkeg2khyg7jly" path="res://FIRE.ogg" id="4_hyhxt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l8jix"]
 shader = ExtResource("3_cftwo")
@@ -125,7 +126,12 @@ theme = ExtResource("1_3ey47")
 theme_override_font_sizes/font_size = 80
 text = "Back"
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_hyhxt")
+autoplay = true
+
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Credits2" to="." method="_on_credits_2_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Credits/Back" to="." method="_on_back_pressed"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
