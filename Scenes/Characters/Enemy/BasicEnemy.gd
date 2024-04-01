@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 const SPEED: float = 500
 
+var enemydeath: PackedScene = preload("res://Scenes/Extras/enemydeath.tscn")
+
 @export var player: Node2D
 var healthpackfab = preload("res://Scenes/Pickups/healthpack.tscn")
 var weapondrop := preload("res://Scenes/Pickups/dropped-weapon.tscn")
@@ -49,7 +51,12 @@ func damage(damage: float):
 		die()
 
 func die():
-	
+	var deathparts = enemydeath.instantiate()
+	print(deathparts)
+	deathparts.global_position = global_position
+	deathparts.emitting = true
+	add_sibling(deathparts)
+	deathparts.global_position = global_position
 	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

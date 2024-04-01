@@ -42,6 +42,17 @@ theme = ExtResource("1_3ey47")
 theme_override_font_sizes/font_size = 80
 text = "What Lies Down There"
 
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 896.0
+offset_top = 968.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme = ExtResource("1_3ey47")
+theme_override_font_sizes/font_size = 80
+text = "Test build 2"
+horizontal_alignment = 2
+
 [node name="Start" type="Button" parent="."]
 layout_mode = 0
 offset_left = 384.0

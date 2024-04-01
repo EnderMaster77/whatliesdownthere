@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var playerdeath: PackedScene = preload("res://Scenes/Extras/playerdeath.tscn")
 const SPEED: float = 1000
 @export var health: float = 100
 var weapons: Array
@@ -34,9 +35,19 @@ var can_dash: bool = true
 func damage(damage: float):
 	health -= damage
 	if health <= 0:
+		$"../Camera2D2".enabled = true
+		$"../Camera2D2".global_position = global_position
+		$"../DeathScreen".show()
+		var deathparts = playerdeath.instantiate()
+		print(deathparts)
+		deathparts.global_position = global_position
+		deathparts.emitting = true
+		add_sibling(deathparts)
+		deathparts.global_position = global_position
 		die()
 
 func die():
+	$".".hide()
 	queue_free()
 
 func _process(delta: float) -> void:
@@ -110,7 +121,7 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("Dash") && can_dash == true:
+	if Input.is_action_just_pressed("Dash") && can_dash == true && velocity != Vector2.ZERO:
 		$DashTimer.start()
 		$AudioStreamPlayer2D.play()
 		can_dash = false
